@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Interactif</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
+                    colors: {
+                        dark: '#050505',
+                        card: '#111111',
+                        accent: '#00d2ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #050505; color: #d1d5db; }
+        
+        /* Cartes qui s'agrandissent */
+        .expand-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 280px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .expand-card:hover {
+            max-height: 650px;
+            transform: scale(1.02);
+            border-color: #00d2ff;
+            background: #161616;
+            box-shadow: 0 20px 40px -15px rgba(0, 210, 255, 0.2);
+        }
+        .details { opacity: 0; transition: opacity 0.4s ease; transform: translateY(10px); }
+        .expand-card:hover .details { opacity: 1; transform: translateY(0); margin-top: 1.5rem; }
+
+        /* Menu déroulant Téléphone */
+        details summary::-webkit-details-marker { display: none; }
+        summary { list-style: none; cursor: pointer; }
+        
+        .glass-nav { background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-white font-black tracking-tighter text-xl uppercase">DUBUIS <span class="text-accent italic">LUCAS</span></div>
+            
+            <div class="flex items-center gap-6">
+                <details class="relative group">
+                    <summary class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-accent transition flex items-center gap-2">
+                        <i class="fas fa-phone text-xs"></i> Contact
+                    </summary>
+                    <div class="absolute right-0 mt-4 p-4 bg-card border border-white/10 rounded-xl shadow-2xl w-48 text-center animate-in fade-in slide-in-from-top-2">
+                        <p class="text-[10px] text-gray-500 uppercase mb-2">Mon Numéro :</p>
+                        <a href="tel:0683004903" class="text-white font-bold text-sm hover:text-accent transition">06 83 00 49 03</a>
+                    </div>
+                </details>
+
+                <a href="cv/cv_lucas_dubuis_remake_alternance.pdf" target="_blank" class="hidden md:block bg-white text-black px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-accent transition">
+                    Mon CV <i class="fas fa-download ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-48 pb-24 px-6 text-center max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter italic">
+            TESTER<span class="text-accent"></span> APPRENDRE<span class="text-accent"></span>
+        </h1>
+        <p class="text-gray-400 text-lg leading-relaxed mb-12">
+            Étudiant en Bac+2 CIEL / SNIR. Passionné par l'administration système et la sécurité. 
+            Découvrez mes expérimentations concrètes.
+        </p>
+        
+        <a href="cv/cv_lucas_dubuis_remake_alternance.pdf" target="_blank" class="inline-flex items-center gap-3 bg-accent text-dark px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,210,255,0.3)]">
+            Télécharger mon CV complet <i class="fas fa-file-pdf text-lg"></i>
+        </a>
+    </header>
+
+    <section class="py-10 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
+                        <i class="fas fa-terminal text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Serveur Minecraft (Self-Hosted)</h3>
+                </div>
+                <p class="text-gray-400 font-medium italic">Ancien PC recyclé en serveur Linux Debian.</p>
+                <div class="details border-t border-white/5 pt-4 text-sm leading-relaxed text-gray-300">
+                    <p class="mb-4"><span class="text-accent font-bold underline">Ce que j'ai fait :</span></p>
+                    <ul class="space-y-3 mb-4 text-gray-400">
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Installation Debian :</strong> Configuration sans interface graphique (CLI uniquement).</li>
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Réseau & Box :</strong> Ouverture des ports NAT (25565), gestion de l'IP dynamique.</li>
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Optimisation :</strong> Script de lancement Java pour allouer la RAM (JVM Tuning).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400">
+                        <i class="fas fa-network-wired text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Lab Réseau IPv6</h3>
+                </div>
+                <p class="text-gray-400 font-medium italic">Simulation d'architecture moderne sur Packet Tracer.</p>
+                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
+                    <p class="mb-3">Exploration de l'adressage nouvelle génération.</p>
+                    <p class="text-gray-400 font-light leading-relaxed text-xs">J'ai appris à configurer un routage statique IPv6 et à comprendre comment les machines s'auto-configurent sans serveur DHCP classique.</p>
+                </div>
+            </div>
+
+            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400">
+                        <i class="fas fa-shield-virus text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Initiation Cyber</h3>
+                </div>
+                <p class="text-gray-400 font-medium italic">Tests de protection sur machine virtuelle Linux.</p>
+                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
+                    <p class="mb-3">Mise en place de barrières de sécurité.</p>
+                    <p class="text-gray-400 font-light leading-relaxed text-xs">Apprentissage de Nmap pour voir ce qui est exposé sur mon réseau et utilisation de UFW pour bloquer les intrusions.</p>
+                </div>
+            </div>
+
+            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400">
+                        <i class="fas fa-code text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Analyse Python & IA</h3>
+                </div>
+                <p class="text-gray-400 font-medium italic">Scripts d'automatisation pour le tri de données.</p>
+                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
+                    <p class="mb-3">Automatiser les tâches répétitives.</p>
+                    <p class="text-gray-400 font-light leading-relaxed text-xs">Création d'un petit programme capable de lire des milliers de lignes de logs pour repérer les erreurs ou les tentatives de connexion suspectes.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-white/5">
+        <div class="text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em]">
+            Curiosité & Technique • 2026
+        </div>
+    </footer>
+
+</body>
+</html>
