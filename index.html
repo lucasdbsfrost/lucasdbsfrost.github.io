@@ -26,7 +26,6 @@
     <style>
         body { background-color: #050505; color: #d1d5db; }
         
-        /* Cartes qui s'agrandissent */
         .expand-card {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             max-height: 280px;
@@ -34,7 +33,7 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
         .expand-card:hover {
-            max-height: 650px;
+            max-height: 700px; /* Légèrement augmenté pour le contenu PXE */
             transform: scale(1.02);
             border-color: #00d2ff;
             background: #161616;
@@ -43,7 +42,6 @@
         .details { opacity: 0; transition: opacity 0.4s ease; transform: translateY(10px); }
         .expand-card:hover .details { opacity: 1; transform: translateY(0); margin-top: 1.5rem; }
 
-        /* Menu déroulant Téléphone */
         details summary::-webkit-details-marker { display: none; }
         summary { list-style: none; cursor: pointer; }
         
@@ -91,6 +89,7 @@
     <section class="py-10 px-6 max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-8">
 
+            <!-- PROJET 1 : MINECRAFT -->
             <div class="expand-card p-8 rounded-3xl group cursor-pointer">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
@@ -100,15 +99,37 @@
                 </div>
                 <p class="text-gray-400 font-medium italic">Ancien PC recyclé en serveur Linux Debian.</p>
                 <div class="details border-t border-white/5 pt-4 text-sm leading-relaxed text-gray-300">
-                    <p class="mb-4"><span class="text-accent font-bold underline">Ce que j'ai fait :</span></p>
+                    <p class="mb-4"><span class="text-accent font-bold underline">Réalisations :</span></p>
                     <ul class="space-y-3 mb-4 text-gray-400">
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Installation Debian :</strong> Configuration sans interface graphique (CLI uniquement).</li>
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Réseau & Box :</strong> Ouverture des ports NAT (25565), gestion de l'IP dynamique.</li>
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Optimisation :</strong> Script de lancement Java pour allouer la RAM (JVM Tuning).</li>
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Installation Debian :</strong> Setup CLI-only pour maximiser les ressources.</li>
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Réseau :</strong> NAT/PAT et sécurisation via pare-feu.</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- NOUVEAU PROJET : SERVEUR PXE -->
+            <div class="expand-card p-8 rounded-3xl group cursor-pointer border-emerald-500/20">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400">
+                        <i class="fas fa-server text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Serveur de Déploiement PXE</h3>
+                </div>
+                <p class="text-gray-400 font-medium italic">Installation automatisée d'OS via le réseau.</p>
+                <div class="details border-t border-white/5 pt-4 text-sm leading-relaxed text-gray-300">
+                    <p class="mb-4"><span class="text-emerald-400 font-bold underline">Stack technique :</span></p>
+                    <ul class="space-y-3 mb-6 text-gray-400">
+                        <li><i class="fas fa-check text-emerald-400 mr-2 text-[10px]"></i><strong>DHCP & TFTP :</strong> Configuration pour l'amorçage réseau.</li>
+                        <li><i class="fas fa-check text-emerald-400 mr-2 text-[10px]"></i><strong>Syslinux/iPXE :</strong> Création de menus de boot personnalisés.</li>
+                        <li><i class="fas fa-check text-emerald-400 mr-2 text-[10px]"></i><strong>NFS/HTTP :</strong> Hébergement des images ISO et fichiers d'installation.</li>
+                    </ul>
+                    <a href="https://github.com/lucasdbsfrost/Serveur-pxe-dubuisXgadeau" target="_blank" class="inline-flex items-center gap-2 text-white bg-white/10 hover:bg-emerald-500 hover:text-dark px-4 py-2 rounded-lg transition-all text-xs font-bold uppercase">
+                        Voir le code sur GitHub <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PROJET 3 : IPv6 -->
             <div class="expand-card p-8 rounded-3xl group cursor-pointer">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400">
@@ -119,10 +140,11 @@
                 <p class="text-gray-400 font-medium italic">Simulation d'architecture moderne sur Packet Tracer.</p>
                 <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
                     <p class="mb-3">Exploration de l'adressage nouvelle génération.</p>
-                    <p class="text-gray-400 font-light leading-relaxed text-xs">J'ai appris à configurer un routage statique IPv6 et à comprendre comment les machines s'auto-configurent sans serveur DHCP classique.</p>
+                    <p class="text-gray-400 font-light leading-relaxed text-xs">Configuration de routage statique et compréhension de l'auto-configuration sans état (SLAAC).</p>
                 </div>
             </div>
 
+            <!-- PROJET 4 : CYBER -->
             <div class="expand-card p-8 rounded-3xl group cursor-pointer">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400">
@@ -130,24 +152,10 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white">Initiation Cyber</h3>
                 </div>
-                <p class="text-gray-400 font-medium italic">Tests de protection sur machine virtuelle Linux.</p>
+                <p class="text-gray-400 font-medium italic">Tests de protection sur VM Linux.</p>
                 <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
                     <p class="mb-3">Mise en place de barrières de sécurité.</p>
-                    <p class="text-gray-400 font-light leading-relaxed text-xs">Apprentissage de Nmap pour voir ce qui est exposé sur mon réseau et utilisation de UFW pour bloquer les intrusions.</p>
-                </div>
-            </div>
-
-            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400">
-                        <i class="fas fa-code text-xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white">Analyse Python & IA</h3>
-                </div>
-                <p class="text-gray-400 font-medium italic">Scripts d'automatisation pour le tri de données.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <p class="mb-3">Automatiser les tâches répétitives.</p>
-                    <p class="text-gray-400 font-light leading-relaxed text-xs">Création d'un petit programme capable de lire des milliers de lignes de logs pour repérer les erreurs ou les tentatives de connexion suspectes.</p>
+                    <p class="text-gray-400 font-light leading-relaxed text-xs">Utilisation de Nmap pour l'audit et UFW pour la gestion des politiques d'accès.</p>
                 </div>
             </div>
 
