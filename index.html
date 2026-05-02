@@ -33,7 +33,7 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
         .expand-card:hover {
-            max-height: 700px; /* Légèrement augmenté pour le contenu PXE */
+            max-height: 700px;
             transform: scale(1.02);
             border-color: #00d2ff;
             background: #161616;
@@ -59,7 +59,7 @@
                     <summary class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-accent transition flex items-center gap-2">
                         <i class="fas fa-phone text-xs"></i> Contact
                     </summary>
-                    <div class="absolute right-0 mt-4 p-4 bg-card border border-white/10 rounded-xl shadow-2xl w-48 text-center animate-in fade-in slide-in-from-top-2">
+                    <div class="absolute right-0 mt-4 p-4 bg-card border border-white/10 rounded-xl shadow-2xl w-48 text-center">
                         <p class="text-[10px] text-gray-500 uppercase mb-2">Mon Numéro :</p>
                         <a href="tel:0683004903" class="text-white font-bold text-sm hover:text-accent transition">06 83 00 49 03</a>
                     </div>
@@ -89,47 +89,42 @@
     <section class="py-10 px-6 max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-8">
 
-            <!-- PROJET 1 : MINECRAFT -->
+            <!-- 1. SERVEUR MINECRAFT -->
             <div class="expand-card p-8 rounded-3xl group cursor-pointer">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
                         <i class="fas fa-terminal text-xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">Serveur Minecraft (Self-Hosted)</h3>
+                    <h3 class="text-2xl font-bold text-white">Serveur Minecraft</h3>
                 </div>
                 <p class="text-gray-400 font-medium italic">Ancien PC recyclé en serveur Linux Debian.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm leading-relaxed text-gray-300">
-                    <p class="mb-4"><span class="text-accent font-bold underline">Réalisations :</span></p>
-                    <ul class="space-y-3 mb-4 text-gray-400">
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Installation Debian :</strong> Setup CLI-only pour maximiser les ressources.</li>
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i><strong>Réseau :</strong> NAT/PAT et sécurisation via pare-feu.</li>
+                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i>Installation Debian CLI.</li>
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i>Ouverture des ports NAT (25565).</li>
+                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i>Optimisation JVM (RAM).</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- NOUVEAU PROJET : SERVEUR PXE -->
-            <div class="expand-card p-8 rounded-3xl group cursor-pointer border-emerald-500/20">
+            <!-- 2. SERVEUR PXE (NOUVEAU) -->
+            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400">
                         <i class="fas fa-server text-xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">Serveur de Déploiement PXE</h3>
+                    <h3 class="text-2xl font-bold text-white">Serveur PXE</h3>
                 </div>
-                <p class="text-gray-400 font-medium italic">Installation automatisée d'OS via le réseau.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm leading-relaxed text-gray-300">
-                    <p class="mb-4"><span class="text-emerald-400 font-bold underline">Stack technique :</span></p>
-                    <ul class="space-y-3 mb-6 text-gray-400">
-                        <li><i class="fas fa-check text-emerald-400 mr-2 text-[10px]"></i><strong>DHCP & TFTP :</strong> Configuration pour l'amorçage réseau.</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2 text-[10px]"></i><strong>Syslinux/iPXE :</strong> Création de menus de boot personnalisés.</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2 text-[10px]"></i><strong>NFS/HTTP :</strong> Hébergement des images ISO et fichiers d'installation.</li>
-                    </ul>
-                    <a href="https://github.com/lucasdbsfrost/Serveur-pxe-dubuisXgadeau" target="_blank" class="inline-flex items-center gap-2 text-white bg-white/10 hover:bg-emerald-500 hover:text-dark px-4 py-2 rounded-lg transition-all text-xs font-bold uppercase">
-                        Voir le code sur GitHub <i class="fab fa-github"></i>
+                <p class="text-gray-400 font-medium italic">Déploiement d'OS via le réseau local.</p>
+                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
+                    <p class="mb-4">Automatisation de l'installation système.</p>
+                    <a href="https://github.com/lucasdbsfrost/Serveur-pxe-dubuisXgadeau" target="_blank" class="inline-flex items-center gap-2 text-white bg-white/10 hover:bg-emerald-500 hover:text-dark px-4 py-2 rounded-lg transition-all text-[10px] font-bold uppercase">
+                        Accéder au GitHub <i class="fab fa-github"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- PROJET 3 : IPv6 -->
+            <!-- 3. LAB IPV6 -->
             <div class="expand-card p-8 rounded-3xl group cursor-pointer">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400">
@@ -137,14 +132,13 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white">Lab Réseau IPv6</h3>
                 </div>
-                <p class="text-gray-400 font-medium italic">Simulation d'architecture moderne sur Packet Tracer.</p>
+                <p class="text-gray-400 font-medium italic">Simulation Cisco Packet Tracer.</p>
                 <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <p class="mb-3">Exploration de l'adressage nouvelle génération.</p>
-                    <p class="text-gray-400 font-light leading-relaxed text-xs">Configuration de routage statique et compréhension de l'auto-configuration sans état (SLAAC).</p>
+                    <p class="text-gray-400 leading-relaxed">Routage statique IPv6 et auto-configuration SLAAC sans serveur DHCP classique.</p>
                 </div>
             </div>
 
-            <!-- PROJET 4 : CYBER -->
+            <!-- 4. INITIATION CYBER -->
             <div class="expand-card p-8 rounded-3xl group cursor-pointer">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400">
@@ -152,10 +146,23 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white">Initiation Cyber</h3>
                 </div>
-                <p class="text-gray-400 font-medium italic">Tests de protection sur VM Linux.</p>
+                <p class="text-gray-400 font-medium italic">Sécurisation de machines virtuelles.</p>
                 <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <p class="mb-3">Mise en place de barrières de sécurité.</p>
-                    <p class="text-gray-400 font-light leading-relaxed text-xs">Utilisation de Nmap pour l'audit et UFW pour la gestion des politiques d'accès.</p>
+                    <p class="text-gray-400 leading-relaxed">Audit réseau avec Nmap et configuration de pare-feu UFW.</p>
+                </div>
+            </div>
+
+            <!-- 5. ANALYSE PYTHON (LA REVOILA !) -->
+            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400">
+                        <i class="fas fa-code text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Analyse Python & IA</h3>
+                </div>
+                <p class="text-gray-400 font-medium italic">Scripts d'automatisation de tri.</p>
+                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
+                    <p class="text-gray-400 leading-relaxed">Création d'un outil de lecture de logs pour détecter les intrusions ou erreurs système.</p>
                 </div>
             </div>
 
