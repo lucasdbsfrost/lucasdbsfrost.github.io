@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Interactif</title>
+    <title>Lucas Dubuis | Portfolio Interactif</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -16,162 +16,252 @@
                     fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
                     colors: {
                         dark: '#050505',
-                        card: '#111111',
+                        card: '#0b0b0c',
                         accent: '#00d2ff',
+                        accentDark: '#006699'
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #050505; color: #d1d5db; }
+        body { 
+            background-color: #050505; 
+            color: #e5e7eb;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
         
         .expand-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            max-height: 280px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 200px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            background: linear-gradient(180deg, rgba(17,17,17,0.8) 0%, rgba(11,11,12,0.8) 100%);
         }
+        
+        @media (min-width: 768px) {
+            .expand-card { max-height: 220px; }
+        }
+
         .expand-card:hover {
-            max-height: 700px;
-            transform: scale(1.02);
-            border-color: #00d2ff;
-            background: #161616;
-            box-shadow: 0 20px 40px -15px rgba(0, 210, 255, 0.2);
+            max-height: 800px;
+            transform: translateY(-4px);
+            border-color: rgba(0, 210, 255, 0.4);
+            background: rgba(15, 15, 18, 0.95);
+            box-shadow: 0 30px 60px -15px rgba(0, 210, 255, 0.15),
+                        inset 0 1px 0px 0px rgba(0, 210, 255, 0.2);
         }
-        .details { opacity: 0; transition: opacity 0.4s ease; transform: translateY(10px); }
-        .expand-card:hover .details { opacity: 1; transform: translateY(0); margin-top: 1.5rem; }
+        
+        .details { 
+            opacity: 0; 
+            visibility: hidden;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            transform: translateY(20px); 
+        }
+        
+        .expand-card:hover .details { 
+            opacity: 1; 
+            visibility: visible;
+            transform: translateY(0); 
+        }
 
         details summary::-webkit-details-marker { display: none; }
         summary { list-style: none; cursor: pointer; }
         
-        .glass-nav { background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .glass-nav { 
+            background: rgba(5, 5, 5, 0.75); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03); 
+        }
+
+        .glow-text {
+            text-shadow: 0 0 40px rgba(0, 210, 255, 0.25);
+        }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-accent selection:text-dark">
 
-    <nav class="fixed top-0 w-full z-50 glass-nav">
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-white font-black tracking-tighter text-xl uppercase">DUBUIS <span class="text-accent italic">LUCAS</span></div>
+            <div class="text-white font-black tracking-tighter text-xl uppercase">DUBUIS <span class="text-accent italic font-light tracking-normal">LUCAS</span></div>
             
             <div class="flex items-center gap-6">
                 <details class="relative group">
-                    <summary class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-accent transition flex items-center gap-2">
-                        <i class="fas fa-phone text-xs"></i> Contact
+                    <summary class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-accent transition flex items-center gap-2 py-2">
+                        <i class="fas fa-phone text-xs text-accent"></i> Contact
                     </summary>
-                    <div class="absolute right-0 mt-4 p-4 bg-card border border-white/10 rounded-xl shadow-2xl w-48 text-center">
-                        <p class="text-[10px] text-gray-500 uppercase mb-2">Mon Numéro :</p>
-                        <a href="tel:0683004903" class="text-white font-bold text-sm hover:text-accent transition">06 83 00 49 03</a>
+                    <div class="absolute right-0 mt-3 p-4 bg-card border border-white/10 rounded-2xl shadow-2xl w-56 text-center backdrop-blur-xl animate-fade-in">
+                        <p class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Me joindre directement :</p>
+                        <a href="tel:0683004903" class="text-white font-black text-base hover:text-accent transition block tracking-wide">06 83 00 49 03</a>
+                        <div class="h-px bg-white/5 my-2"></div>
+                        <p class="text-[9px] text-gray-500 uppercase tracking-wider">Marseille & Alentours</p>
                     </div>
                 </details>
 
-                <a href="cv/cv_lucas_dubuis_remake_alternance.pdf" target="_blank" class="hidden md:block bg-white text-black px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-accent transition">
-                    Mon CV <i class="fas fa-download ml-2"></i>
+                <a href="cv/cv_lucas_dubuis_remake_alternance.pdf" target="_blank" class="hidden sm:inline-flex bg-white/10 text-white hover:bg-white hover:text-black px-5 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 items-center gap-2 border border-white/5">
+                    Mon CV <i class="fas fa-download text-[9px]"></i>
                 </a>
             </div>
         </div>
     </nav>
 
-    <header class="pt-48 pb-24 px-6 text-center max-w-4xl mx-auto">
-        <h1 class="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter italic">
-            TESTER<span class="text-accent"></span> APPRENDRE<span class="text-accent"></span>
+    <header class="relative pt-44 pb-20 px-6 text-center max-w-4xl mx-auto overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] font-bold uppercase tracking-widest mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span> Admis à Epitech • Profil Alternant
+        </div>
+
+        <h1 class="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter uppercase glow-text">
+            Tester<span class="text-accent">.</span> Apprendre<span class="text-accent">.</span>
         </h1>
-        <p class="text-gray-400 text-lg leading-relaxed mb-12">
-            Étudiant en Bac+2 CIEL / SNIR. Passionné par l'administration système et la sécurité. 
-            Découvrez mes expérimentations concrètes.
+        <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
+            Récemment diplômé en <span class="text-white font-semibold">BTS CIEL (ex SNIR)</span>. Je combine la logique du développement applicatif avec une passion rigoureuse pour l'administration systèmes, les architectures réseaux et la sécurité informatique.
         </p>
         
-        <a href="cv/cv_lucas_dubuis_remake_alternance.pdf" target="_blank" class="inline-flex items-center gap-3 bg-accent text-dark px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,210,255,0.3)]">
-            Télécharger mon CV complet <i class="fas fa-file-pdf text-lg"></i>
+        <a href="cv/cv_lucas_dubuis_remake_alternance.pdf" target="_blank" class="inline-flex items-center gap-3 bg-accent text-dark px-8 py-4 rounded-xl font-extrabold uppercase text-xs tracking-wider hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_40px_rgba(0,210,255,0.25)] hover:shadow-[0_0_50px_rgba(0,210,255,0.4)]">
+            Télécharger mon CV Complet <i class="fas fa-file-pdf text-base"></i>
         </a>
     </header>
 
-    <section class="py-10 px-6 max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-8">
+    <section class="pb-32 px-6 max-w-6xl mx-auto">
+        <div class="flex items-center gap-3 mb-10">
+            <div class="h-px bg-gradient-to-r from-accent to-transparent w-12"></div>
+            <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-accent">Laboratoire & Expérimentations</h2>
+        </div>
 
-            <!-- 1. SERVEUR MINECRAFT -->
-            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
-                        <i class="fas fa-terminal text-xl"></i>
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent/5 rounded-xl flex items-center justify-center text-accent border border-accent/10 group-hover:bg-accent group-hover:text-dark transition-all duration-300">
+                            <i class="fas fa-terminal text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Serveur Linux Autogéré</h3>
+                            <p class="text-xs text-gray-500 font-medium mt-0.5">Recyclage matériel & Hosting Privé</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">Serveur Minecraft</h3>
+                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-accent group-hover:rotate-180 transition-all duration-300 text-xs"></i>
                 </div>
-                <p class="text-gray-400 font-medium italic">Ancien PC recyclé en serveur Linux Debian.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <ul class="space-y-2 text-gray-400">
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i>Installation Debian CLI.</li>
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i>Ouverture des ports NAT (25565).</li>
-                        <li><i class="fas fa-arrow-right text-accent mr-2 text-[10px]"></i>Optimisation JVM (RAM).</li>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">Transformation complète d'une machine physique grand public en serveur Linux dédié à l'hébergement de services (Minecraft).</p>
+                
+                <div class="details border-t border-white/5 pt-5 text-sm">
+                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
+                    <ul class="space-y-2.5 text-gray-400">
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-accent text-[10px] mt-1"></i> <span><strong>OS :</strong> Installation et durcissement d'une distribution Debian Server (CLI uniquement).</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-accent text-[10px] mt-1"></i> <span><strong>Réseau :</strong> Configuration IP statique LAN, routage et translation d'adresses (NAT/PAT) sur passerelle résidentielle.</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-accent text-[10px] mt-1"></i> <span><strong>Optimisation :</strong> Paramétrage des arguments de la JVM (Java Virtual Machine) pour la gestion dynamique des allocations de mémoire RAM.</span></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 2. SERVEUR PXE (NOUVEAU) -->
-            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400">
-                        <i class="fas fa-server text-xl"></i>
+            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-500/5 rounded-xl flex items-center justify-center text-emerald-400 border border-emerald-500/10 group-hover:bg-emerald-500 group-hover:text-dark transition-all duration-300">
+                            <i class="fas fa-server text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Infrastructure PXE</h3>
+                            <p class="text-xs text-gray-500 font-medium mt-0.5">Automatisation de déploiement réseau</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">Serveur PXE</h3>
+                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-emerald-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
                 </div>
-                <p class="text-gray-400 font-medium italic">Déploiement d'OS via le réseau local.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <p class="mb-4">Automatisation de l'installation système.</p>
-                    <a href="https://github.com/lucasdbsfrost/Serveur-pxe-dubuisXgadeau" target="_blank" class="inline-flex items-center gap-2 text-white bg-white/10 hover:bg-emerald-500 hover:text-dark px-4 py-2 rounded-lg transition-all text-[10px] font-bold uppercase">
-                        Accéder au GitHub <i class="fab fa-github"></i>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">Mise en place d'un environnement réseau permettant l'installation d'architectures OS sans support physique local.</p>
+                
+                <div class="details border-t border-white/5 pt-5 text-sm">
+                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
+                    <ul class="space-y-2.5 text-gray-400 mb-5">
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-emerald-400 text-[10px] mt-1"></i> <span>Gestion des chargeurs d'amorçage réseau (Syslinux / GRUB Netboot) pour proposer des installations multisystèmes.</span></li>
+                    </ul>
+                    <a href="https://github.com/lucasdbsfrost/Serveur-pxe-dubuisXgadeau" target="_blank" class="inline-flex items-center gap-2 text-white bg-white/5 hover:bg-emerald-500 hover:text-dark px-4 py-2 rounded-xl transition-all text-[10px] font-bold uppercase tracking-wider border border-white/5">
+                        Consulter la documentation <i class="fab fa-github text-xs"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- 3. LAB IPV6 -->
-            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400">
-                        <i class="fas fa-network-wired text-xl"></i>
+            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-500/5 rounded-xl flex items-center justify-center text-blue-400 border border-blue-500/10 group-hover:bg-blue-500 group-hover:text-dark transition-all duration-300">
+                            <i class="fas fa-network-wired text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Maquette Réseau IPv6</h3>
+                            <p class="text-xs text-gray-500 font-medium mt-0.5">Simulation d'architectures routées</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">Lab Réseau IPv6</h3>
+                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-blue-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
                 </div>
-                <p class="text-gray-400 font-medium italic">Simulation Cisco Packet Tracer.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <p class="text-gray-400 leading-relaxed">Routage statique IPv6 et auto-configuration SLAAC sans serveur DHCP classique.</p>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">Conception complète et routage d’une topologie réseau complexe sous l'environnement Cisco Packet Tracer.</p>
+                
+                <div class="details border-t border-white/5 pt-5 text-sm">
+                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
+                    <ul class="space-y-2.5 text-gray-400">
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-blue-400 text-[10px] mt-1"></i> <span>Mise en œuvre du routage statique et dynamique inter-routeurs basé intégralement sur l'adressage IPv6.</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-blue-400 text-[10px] mt-1"></i> <span>Configuration des mécanismes d'auto-configuration d'adresses de type <strong>SLAAC</strong> (Stateless Address Autoconfiguration) et d'annonces de routeurs (RA).</span></li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- 4. INITIATION CYBER -->
-            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400">
-                        <i class="fas fa-shield-virus text-xl"></i>
+            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-red-500/5 rounded-xl flex items-center justify-center text-red-400 border border-red-500/10 group-hover:bg-red-500 group-hover:text-dark transition-all duration-300">
+                            <i class="fas fa-shield-virus text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Lab Sécurité & Hardening</h3>
+                            <p class="text-xs text-gray-500 font-medium mt-0.5">Audit et protection d'environnements virtualisés</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">Initiation Cyber</h3>
+                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-red-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
                 </div>
-                <p class="text-gray-400 font-medium italic">Sécurisation de machines virtuelles.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <p class="text-gray-400 leading-relaxed">Audit réseau avec Nmap et configuration de pare-feu UFW.</p>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">Auditer l'exposition d'un système virtualisé pour appliquer les règles de filtrage réseau adaptées.</p>
+                
+                <div class="details border-t border-white/5 pt-5 text-sm">
+                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
+                    <ul class="space-y-2.5 text-gray-400">
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-red-400 text-[10px] mt-1"></i> <span><strong>Reconnaissance :</strong> Utilisation de l'outil Nmap (scans SYN, détection de bannières et de versions de services applicatifs).</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-red-400 text-[10px] mt-1"></i> <span><strong>Filtrage :</strong> Écriture de politiques restrictives sur le pare-feu applicatif hôte via l'utilitaire de configuration UFW (Iptables backend).</span></li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- 5. ANALYSE PYTHON (LA REVOILA !) -->
-            <div class="expand-card p-8 rounded-3xl group cursor-pointer">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400">
-                        <i class="fas fa-code text-xl"></i>
+            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-500/5 rounded-xl flex items-center justify-center text-purple-400 border border-purple-500/10 group-hover:bg-purple-500 group-hover:text-dark transition-all duration-300">
+                            <i class="fas fa-code text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Analyseur de Logs Python</h3>
+                            <p class="text-xs text-gray-500 font-medium mt-0.5">Scripting au service de la supervision</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">Analyse Python & IA</h3>
+                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-purple-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
                 </div>
-                <p class="text-gray-400 font-medium italic">Scripts d'automatisation de tri.</p>
-                <div class="details border-t border-white/5 pt-4 text-sm text-gray-300">
-                    <p class="text-gray-400 leading-relaxed">Création d'un outil de lecture de logs pour détecter les intrusions ou erreurs système.</p>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">Développement de scripts légers d'automatisation dédiés au traitement de fichiers volumineux et à la détection d'anomalies.</p>
+                
+                <div class="details border-t border-white/5 pt-5 text-sm">
+                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
+                    <ul class="space-y-2.5 text-gray-400">
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-purple-400 text-[10px] mt-1"></i> <span>Parsing de fichiers systèmes (`/var/log/auth.log`, serveurs Web) à l'aide d'expressions régulières (Regex) en Python.</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-purple-400 text-[10px] mt-1"></i> <span>Extraction automatisée des adresses IP suspectes effectuant des requêtes malveillantes ou des tentatives d'intrusion répétées (Brute-force).</span></li>
+                    </ul>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <footer class="py-20 text-center border-t border-white/5">
-        <div class="text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em]">
-            Curiosité & Technique • 2026
+    <footer class="py-16 text-center border-t border-white/5 bg-black/40">
+        <div class="text-[10px] font-mono text-gray-600 uppercase tracking-[0.6em]">
+            Curiosité • Rigueur • Technique — 2026
         </div>
     </footer>
 
