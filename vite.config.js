@@ -32,8 +32,8 @@ export default defineConfig({
   base: "/",
   plugins: [react(), securityHeaders()],
   build: {
-    sourcemap: false,     // ne publie pas le code source lisible
-    assetsInlineLimit: 0, // pas de fichiers intégrés en data:, la CSP reste stricte
-    chunkSizeWarningLimit: 700, // three.js est gros, mais chargé à part après le texte
+    sourcemap: false,     
+    assetsInlineLimit: 0, 
+    chunkSizeWarningLimit: 700, 
   },
 });
