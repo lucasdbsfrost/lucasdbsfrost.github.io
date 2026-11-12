@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0B1020" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ECEEF2" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="only dark">
+<meta name="theme-color" content="#0B1020">
 <title>Lucas Dubuis | Portfolio Interactif</title>
 <meta name="description" content="Lucas Dubuis, diplômé du BTS CIEL. Administration systèmes, architectures réseaux et sécurité informatique. À la recherche d’un emploi ou d’une alternance à Marseille.">
 <meta property="og:title" content="Lucas Dubuis | Portfolio Interactif">
@@ -20,7 +19,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
-  color-scheme: dark light;
+  /* Site en thème sombre uniquement : « only » empêche aussi les navigateurs intégrés
+     (Instagram, etc.) de recolorer la page par-dessus. */
+  color-scheme: dark;
+  color-scheme: only dark;
   --bg-rgb: 11 16 32;
   --bg: rgb(var(--bg-rgb));
   --ink: #E9EDF5;
@@ -33,16 +35,6 @@
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --pad: clamp(20px, 6vw, 112px);
   --nav-h: 64px;
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg-rgb: 236 238 242;
-    --ink: #0E1424;
-    --muted: #515B74;
-    --line: rgb(14 20 36 / .18);
-    --amber: #F2A100;
-    --accent-ink: #8A5300;
-  }
 }
 
 html {
@@ -412,7 +404,6 @@ main { position: relative; z-index: 2; }
   var canvas = document.getElementById('scene');
   var stops = Array.prototype.slice.call(document.querySelectorAll('[data-stop]'));
   var railLinks = Array.prototype.slice.call(document.querySelectorAll('.route a'));
-  var mqLight = window.matchMedia('(prefers-color-scheme: light)');
   var mqMobile = window.matchMedia('(max-width: 860px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -484,13 +475,11 @@ main { position: relative; z-index: 2; }
   } catch (e) { fallback(); return; }
 
   /* ------------------------------------------------------------------
-     Matériaux et thèmes (les couleurs suivent le mode clair / sombre)
+     Matériaux et couleurs de la scène (thème sombre)
   ------------------------------------------------------------------ */
   var THEMES = {
     dark:  { bg: 0x0B1020, body: 0x1C2644, hi: 0x36446F, edge: 0xA6B6DC, dot: 0x46537F, link: 0x3A4772,
-             amber: 0xFFB224, alert: 0xFF5A4F, sky: 0xC8D6FF, ground: 0x0B1020, hemi: 0.95, sun: 0.75 },
-    light: { bg: 0xECEEF2, body: 0xFFFFFF, hi: 0xC6CDDB, edge: 0x0E1424, dot: 0xAEB6C6, link: 0xA7B0C2,
-             amber: 0xF2A100, alert: 0xD43A2F, sky: 0xFFFFFF, ground: 0xB9C0CE, hemi: 0.9, sun: 0.4 }
+             amber: 0xFFB224, alert: 0xFF5A4F, sky: 0xC8D6FF, ground: 0x0B1020, hemi: 0.95, sun: 0.75 }
   };
   var M = {
     body:  new THREE.MeshLambertMaterial(),
@@ -512,7 +501,7 @@ main { position: relative; z-index: 2; }
   scene.add(hemi, sun);
 
   function applyTheme() {
-    var T = mqLight.matches ? THEMES.light : THEMES.dark;
+    var T = THEMES.dark;
     renderer.setClearColor(T.bg, 1);
     scene.fog.color.setHex(T.bg);
     M.body.color.setHex(T.body); M.hi.color.setHex(T.hi);
@@ -973,8 +962,6 @@ main { position: relative; z-index: 2; }
   }
 
   applyTheme();
-  if (mqLight.addEventListener) mqLight.addEventListener('change', applyTheme);
-  else if (mqLight.addListener) mqLight.addListener(applyTheme);
   window.addEventListener('resize', resize);
   window.addEventListener('load', fitHero);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero);
