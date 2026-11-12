@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+
+TU PENSAIS TROUVER QUELQUE CHOSE ICI ?
+BAH NON RIEN <3
