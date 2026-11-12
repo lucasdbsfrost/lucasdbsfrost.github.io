@@ -1,69 +1,62 @@
-# Portfolio de Lucas Dubuis
+# Mon portfolio
 
-Site React (Vite) avec une scène 3D en three.js. Le défilement fait voyager la caméra
-d une machine à l’autre, une par projet.
+Salut, moi c'est Lucas. Diplômé d'un BTS CIEL, je m'intéresse surtout à
+l'administration systèmes, aux réseaux et à la sécurité informatique.
+Je cherche un emploi ou une alternance à Marseille.
 
-## Organisation
+Le site est en ligne ici : https://lucasdbsfrost.github.io
 
-```
-index.html              Page d’entrée (très courte)
-.env.example            Modèle de réglages locaux (le vrai .env reste hors de Git)
-public/                 Fichiers publiés tels quels (CV, robots.txt)
-private/                Fichiers personnels, jamais envoyés sur GitHub
-src/
-  main.jsx              Point de départ
-  App.jsx               Assemble les sections
-  config.js             Téléphone, lien du CV, lien GitHub
-  data/projects.jsx     Textes des cinq projets
-  components/           Un fichier par bloc (Nav, Hero, Project, Contact...)
-  hooks/                Suivi de la section affichée
-  lib/                  Calculs de défilement et fonctions mathématiques
-  three/                Scène 3D (network.js) et son kit de construction (kit.js)
-  styles/               Un fichier CSS par partie du site
-.github/                Publication automatique et mises à jour de sécurité
-```
+## L'idée
 
-## Commandes
+Plutôt qu'une simple page avec une liste de projets, j'ai voulu que le site
+ressemble à ce que je fais : un petit réseau en 3D. Un commutateur au centre,
+une machine par projet, et quand on fait défiler la page, la caméra passe
+d'une machine à l'autre. Chaque machine montre à sa façon ce que fait le
+projet : le pare-feu bloque des paquets, l'analyseur de logs repère les
+lignes suspectes, etc.
+
+Le site fonctionne aussi sur téléphone, et reste lisible si la 3D ne peut
+pas s'afficher.
+
+## Comment c'est fait
+
+Le site est en React avec Vite, et la scène 3D est faite avec three.js.
+Tous les objets sont construits en code à partir de formes simples, sans
+modèle 3D à télécharger, pour que ça reste léger.
+
+Si tu veux fouiller dans le code :
+
+- les textes des projets sont dans `src/data/projects.jsx`
+- chaque partie de la page a son composant dans `src/components/`
+- la scène 3D est dans `src/three/`
+- le style est découpé par section dans `src/styles/`
+
+## Le lancer chez soi
 
 ```bash
-npm ci          # installe exactement les versions du fichier package-lock.json
-npm run dev     # site en local, avec rechargement automatique
-npm run build   # génère le site dans dist/
-npm run preview # sert dist/ pour vérifier avant de publier
-npm run audit   # cherche des failles connues dans les dépendances
+npm ci
+npm run dev
 ```
 
-## Mise en ligne
+Le site est republié automatiquement par GitHub Actions à chaque envoi sur
+la branche `main`.
 
-1. Envoie tout le projet sur la branche `main` du dépôt.
-2. Sur GitHub : Settings, puis Pages, puis « Source » : choisis **GitHub Actions**.
-3. À chaque envoi sur `main`, le site est compilé et publié (onglet Actions pour suivre).
+## Côté sécurité
 
-Tant que l’étape 2 n’est pas faite, GitHub sert le `index.html` brut et la page reste vide.
+Vu que c'est mon domaine, j'ai essayé de faire les choses proprement, même
+pour un site vitrine. Le site ne charge rien depuis l'extérieur : three.js
+et la police sont servis par le site lui-même, et une Content-Security-Policy
+stricte interdit tout script qui ne vient pas de lui. Les versions des
+dépendances sont figées, Dependabot me prévient quand une mise à jour sort,
+et la publication tourne avec le minimum de droits.
 
-## Sécurité : ce qui est en place
+Ce que j'ai aussi gardé en tête : un site statique ne peut rien cacher.
+Tout ce qui arrive dans le navigateur est lisible par n'importe qui, donc il
+n'y a aucun secret dans ce projet, et il n'y en aura pas. Le fichier `.env`
+et le dossier `private/` servent juste à garder mes fichiers de travail
+hors du dépôt public.
 
-- **Aucune ressource externe** : three.js et la police sont installés avec npm et servis
-  par le site. Pas de CDN, pas de requête vers un tiers.
-- **Content-Security-Policy stricte**, ajoutée au moment du build : seuls les scripts,
-  styles et polices du site peuvent se charger. Pas de script en ligne.
-- **Versions exactes** des dépendances, verrouillées par `package-lock.json`, installées
-  avec `npm ci`.
-- **Publication à droits réduits** : le workflow ne peut que lire le code et publier
-  sur Pages ; les actions sont épinglées sur une empreinte exacte.
-- **Dependabot** propose chaque semaine les mises à jour des dépendances.
-- **Liens externes** ouverts avec `rel="noopener noreferrer"`.
-- **Aucun `dangerouslySetInnerHTML`** : React échappe tout le texte affiché.
-- **Pas de carte source** publiée.
+## Me contacter
 
-## Sécurité : les limites à connaître
-
-- **Un site statique n’a pas de secret.** Tout ce que le navigateur reçoit est lisible
-  par n’importe qui. Les variables `VITE_...` du fichier `.env` sont intégrées au
-  JavaScript publié : elles servent à régler le site, pas à cacher quelque chose.
-- **Le dépôt est public** : tout ce qui est envoyé sur GitHub est visible. Seuls `.env`
-  et le contenu de `private/` restent sur ta machine, parce que `.gitignore` les exclut.
-- **Si tu as un jour besoin d’une vraie clé secrète** (API payante, envoi d’e-mails),
-  elle doit vivre sur un serveur ou une fonction serverless, jamais dans ce projet.
-- Les en-têtes HTTP de sécurité (HSTS, X-Frame-Options) ne se règlent pas sur
-  GitHub Pages. La CSP est donc posée par une balise `<meta>`.
+Mon CV est téléchargeable directement sur le site, et mon numéro est en bas
+de la page.
