@@ -1,269 +1,987 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucas Dubuis | Portfolio Interactif</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0B1020" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ECEEF2" media="(prefers-color-scheme: light)">
+<title>Lucas Dubuis | Portfolio Interactif</title>
+<meta name="description" content="Lucas Dubuis, diplômé du BTS CIEL et admis à Epitech. Administration systèmes, architectures réseaux et sécurité informatique. Profil alternant à Marseille.">
+<meta property="og:title" content="Lucas Dubuis | Portfolio Interactif">
+<meta property="og:description" content="Administration systèmes, architectures réseaux et sécurité informatique. Cinq projets à parcourir de machine en machine.">
+<meta property="og:type" content="website">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
-                    colors: {
-                        dark: '#050505',
-                        card: '#0b0b0c',
-                        accent: '#00d2ff',
-                        accentDark: '#006699'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { 
-            background-color: #050505; 
-            color: #e5e7eb;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        
-        .expand-card {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            max-height: 200px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            background: linear-gradient(180deg, rgba(17,17,17,0.8) 0%, rgba(11,11,12,0.8) 100%);
-        }
-        
-        @media (min-width: 768px) {
-            .expand-card { max-height: 220px; }
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        .expand-card:hover {
-            max-height: 800px;
-            transform: translateY(-4px);
-            border-color: rgba(0, 210, 255, 0.4);
-            background: rgba(15, 15, 18, 0.95);
-            box-shadow: 0 30px 60px -15px rgba(0, 210, 255, 0.15),
-                        inset 0 1px 0px 0px rgba(0, 210, 255, 0.2);
-        }
-        
-        .details { 
-            opacity: 0; 
-            visibility: hidden;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-            transform: translateY(20px); 
-        }
-        
-        .expand-card:hover .details { 
-            opacity: 1; 
-            visibility: visible;
-            transform: translateY(0); 
-        }
+<style>
+*, *::before, *::after { box-sizing: border-box; }
 
-        details summary::-webkit-details-marker { display: none; }
-        summary { list-style: none; cursor: pointer; }
-        
-        .glass-nav { 
-            background: rgba(5, 5, 5, 0.75); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03); 
-        }
+:root {
+  color-scheme: dark light;
+  --bg-rgb: 11 16 32;
+  --bg: rgb(var(--bg-rgb));
+  --ink: #E9EDF5;
+  --muted: #9AA4BD;
+  --line: rgb(233 237 245 / .16);
+  --amber: #FFB224;
+  --accent-ink: #FFB224;
+  --on-amber: #0E1424;
+  --font: "Red Hat Display", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --pad: clamp(20px, 6vw, 112px);
+  --nav-h: 64px;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-rgb: 236 238 242;
+    --ink: #0E1424;
+    --muted: #515B74;
+    --line: rgb(14 20 36 / .18);
+    --amber: #F2A100;
+    --accent-ink: #8A5300;
+  }
+}
 
-        .glow-text {
-            text-shadow: 0 0 40px rgba(0, 210, 255, 0.25);
-        }
-    </style>
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.0625rem/1.55 var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--amber); color: var(--on-amber); }
+
+/* ---------- Scène 3D ---------- */
+#scene {
+  position: fixed; inset: 0;
+  width: 100%; height: 100vh; height: 100lvh;
+  z-index: 0; opacity: 0; transition: opacity 1.1s ease;
+  pointer-events: none;
+}
+.ready #scene { opacity: 1; }
+.scrim {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg,
+    rgb(var(--bg-rgb) / .94) 0%,
+    rgb(var(--bg-rgb) / .74) 27%,
+    rgb(var(--bg-rgb) / 0) 60%);
+}
+
+/* ---------- Navigation ---------- */
+.skip {
+  position: fixed; left: 12px; top: -80px; z-index: 30;
+  background: var(--amber); color: var(--on-amber);
+  padding: 10px 14px; font-weight: 700; text-decoration: none; border-radius: 3px;
+}
+.skip:focus { top: 12px; }
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) var(--pad) 0;
+  background: linear-gradient(rgb(var(--bg-rgb) / .9), rgb(var(--bg-rgb) / 0));
+}
+.brand { font-weight: 800; font-size: 1.05rem; letter-spacing: -.01em; text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 30px); }
+.nav-links a {
+  font-size: .92rem; font-weight: 600; text-decoration: none;
+  padding: 12px 0; color: var(--muted); transition: color .2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links .nav-cv {
+  color: var(--ink); border: 1px solid var(--line); border-radius: 3px;
+  padding: 8px 16px; transition: border-color .2s, background .2s, color .2s;
+}
+.nav-links .nav-cv:hover { background: var(--amber); border-color: var(--amber); color: var(--on-amber); }
+
+/* Itinéraire entre les projets */
+.route {
+  position: fixed; z-index: 9;
+  right: clamp(14px, 2.2vw, 34px); top: 50%; transform: translateY(-50%);
+}
+.route { opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
+.on-route .route { opacity: 1; visibility: visible; }
+.route ol { list-style: none; margin: 0; padding: 0; display: grid; }
+.route a {
+  display: flex; justify-content: flex-end; align-items: center; gap: 10px;
+  padding: 8px 0; color: var(--muted);
+  font-size: .82rem; font-weight: 600; text-decoration: none; transition: color .25s;
+}
+.route a::after {
+  content: ""; width: 14px; height: 2px; background: currentColor; opacity: .55;
+  transition: width .3s ease, background .3s, opacity .3s;
+}
+.route a:hover { color: var(--ink); }
+.route a[aria-current="true"] { color: var(--ink); }
+.route a[aria-current="true"]::after { width: 32px; background: var(--amber); opacity: 1; }
+
+/* ---------- Contenu ---------- */
+main { position: relative; z-index: 2; }
+
+.hero {
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: calc(var(--nav-h) + 24px) var(--pad) clamp(28px, 7vh, 80px);
+}
+.hero h1 {
+  margin: 0 0 .28em;
+  font-size: clamp(2.6rem, 13vw, 7.6rem);
+  font-weight: 800; line-height: .9; letter-spacing: -.045em;
+}
+.hero h1 span { display: block; overflow: hidden; padding-bottom: .16em; margin-bottom: -.16em; }
+.hero h1 i {
+  display: block; font-style: normal;
+  transform: translateY(110%);
+  animation: rise 1s cubic-bezier(.2, .8, .2, 1) .25s forwards;
+}
+.hero h1 span + span i { animation-delay: .38s; }
+@keyframes rise { to { transform: none; } }
+
+.lede { max-width: 35rem; margin: 0 0 1.1em; }
+.lede strong { font-weight: 700; }
+.status {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 1.6em; font-weight: 600; color: var(--accent-ink);
+}
+.status::before { content: ""; width: 8px; height: 8px; background: var(--amber); flex: none; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 50px; padding: 0 24px; border-radius: 3px;
+  font-weight: 700; font-size: .96rem; text-decoration: none;
+  transition: background .2s, border-color .2s, color .2s, transform .15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--amber); color: var(--on-amber); }
+.btn-primary:hover { background: color-mix(in srgb, var(--amber) 82%, white); }
+.btn-ghost { border: 1px solid var(--line); color: var(--ink); background: rgb(var(--bg-rgb) / .35); }
+.btn-ghost:hover { border-color: var(--ink); }
+
+.hop {
+  min-height: 130vh;
+  display: flex; align-items: center;
+  padding: 0 var(--pad);
+}
+.sheet { width: 100%; max-width: 31rem; }
+.group-title { margin: 0 0 1.4em; font-size: 1rem; font-weight: 600; color: var(--muted); }
+.sheet h3, .contact h2 {
+  margin: 0 0 .3em;
+  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+  font-weight: 800; line-height: 1.03; letter-spacing: -.03em;
+}
+.sub { margin: 0 0 1.1em; font-weight: 600; color: var(--accent-ink); }
+.sheet p { margin: 0 0 1.2em; }
+.sheet h4 { margin: 1.7em 0 .7em; font-size: .9rem; font-weight: 700; color: var(--muted); }
+.sheet ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.sheet li {
+  position: relative; padding: .78em 0 .78em 1.25em;
+  border-bottom: 1px solid var(--line); font-size: .98rem;
+}
+.sheet li::before {
+  content: ""; position: absolute; left: 0; top: 1.4em;
+  width: 6px; height: 6px; background: var(--amber);
+}
+.sheet li strong { font-weight: 700; }
+.sheet code { font-family: var(--mono); font-size: .9em; overflow-wrap: anywhere; }
+.doc-link {
+  display: inline-block; margin-top: 1.3em; padding: 6px 0;
+  font-weight: 700; text-underline-offset: 5px; text-decoration-thickness: 2px;
+  text-decoration-color: var(--amber);
+}
+.doc-link:hover { color: var(--accent-ink); }
+
+.contact {
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--nav-h) + 24px) var(--pad) 0;
+}
+.contact .sheet { max-width: 40rem; margin-block: auto; }
+.contact h2 { font-size: 1rem; letter-spacing: 0; font-weight: 600; color: var(--muted); margin-bottom: .6em; }
+.tel {
+  display: inline-block; white-space: nowrap; text-decoration: none;
+  font-size: clamp(2rem, 10.5vw, 6rem); font-weight: 800; line-height: 1; letter-spacing: -.04em;
+  transition: color .2s;
+}
+.tel:hover { color: var(--accent-ink); }
+.place { margin: .9em 0 1.8em; color: var(--muted); font-weight: 600; }
+.foot {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 22px 0 calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  color: var(--muted); font-size: .88rem;
+}
+
+/* ---------- Téléphone et tablette en portrait ---------- */
+@media (max-width: 860px) {
+  :root { --nav-h: 56px; }
+  .scrim {
+    background: linear-gradient(0deg,
+      rgb(var(--bg-rgb) / .96) 0%,
+      rgb(var(--bg-rgb) / .66) 30%,
+      rgb(var(--bg-rgb) / 0) 54%);
+  }
+  .nav-links a[href="#projets"] { display: none; }
+
+  .route {
+    top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) - 6px);
+    left: var(--pad); right: var(--pad); transform: none;
+  }
+  .route ol { display: flex; gap: 5px; }
+  .route li { flex: 1; }
+  .route a { display: block; padding: 9px 0; font-size: 0; }
+  .route a::after { display: block; width: 100%; height: 3px; opacity: .3; }
+  .route a[aria-current="true"]::after, .route a.done::after { width: 100%; background: var(--amber); opacity: 1; }
+
+  .hero { padding-bottom: calc(26px + env(safe-area-inset-bottom, 0px)); }
+  .hop { display: block; min-height: 0; padding: 56vh 0 0; padding-top: 56svh; }
+  .hop .sheet, .contact .sheet {
+    max-width: none;
+    background: rgb(var(--bg-rgb) / .86);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 26px var(--pad) 40px;
+  }
+  .contact { display: block; padding: 56vh 0 0; padding-top: 56svh; min-height: 0; }
+  .contact .sheet { border-bottom: 0; padding-bottom: 34px; }
+  .foot {
+    background: rgb(var(--bg-rgb) / .86);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    margin: 0; padding-inline: var(--pad);
+  }
+  .actions .btn { flex: 1 1 auto; }
+}
+@media (min-width: 861px) {
+  .foot { margin-top: auto; }
+}
+
+/* Sans WebGL : le contenu reste lisible, sans les fenêtres vides */
+.no-webgl #scene, .no-webgl .scrim { display: none; }
+@media (max-width: 860px) {
+  .no-webgl .hop, .no-webgl .contact { padding-top: 0; }
+}
+.no-webgl .hop { min-height: 0; padding-block: 48px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero h1 i { animation: none; transform: none; }
+  #scene { transition: none; }
+}
+</style>
 </head>
-<body class="antialiased selection:bg-accent selection:text-dark">
 
-    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-white font-black tracking-tighter text-xl uppercase">DUBUIS <span class="text-accent italic font-light tracking-normal">LUCAS</span></div>
-            
-            <div class="flex items-center gap-6">
-                <details class="relative group">
-                    <summary class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-accent transition flex items-center gap-2 py-2">
-                        <i class="fas fa-phone text-xs text-accent"></i> Contact
-                    </summary>
-                    <div class="absolute right-0 mt-3 p-4 bg-card border border-white/10 rounded-2xl shadow-2xl w-56 text-center backdrop-blur-xl animate-fade-in">
-                        <p class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Me joindre directement :</p>
-                        <a href="tel:0683004903" class="text-white font-black text-base hover:text-accent transition block tracking-wide">06 83 00 49 03</a>
-                        <div class="h-px bg-white/5 my-2"></div>
-                        <p class="text-[9px] text-gray-500 uppercase tracking-wider">Marseille & Alentours</p>
-                    </div>
-                </details>
+<body>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
 
-                <a href="cv/cv_lucas_dubuis_pdf_alternance.pdf" target="_blank" class="hidden sm:inline-flex bg-white/10 text-white hover:bg-white hover:text-black px-5 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 items-center gap-2 border border-white/5">
-                    Mon CV <i class="fas fa-download text-[9px]"></i>
-                </a>
-            </div>
-        </div>
-    </nav>
+<a class="skip" href="#projets">Aller aux projets</a>
 
-    <header class="relative pt-44 pb-20 px-6 text-center max-w-4xl mx-auto overflow-hidden">
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
-        
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] font-bold uppercase tracking-widest mb-6">
-            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span> Admis à Epitech • Profil Alternant
-        </div>
+<header class="nav">
+  <a class="brand" href="#accueil">Lucas Dubuis</a>
+  <div class="nav-links">
+    <a href="#projets">Projets</a>
+    <a href="#contact">Contact</a>
+    <a class="nav-cv" href="cv/cv_lucas_dubuis_pdf_alternance.pdf" target="_blank" rel="noopener">Mon CV</a>
+  </div>
+</header>
 
-        <h1 class="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter uppercase glow-text">
-            Tester<span class="text-accent">.</span> Apprendre<span class="text-accent">.</span>
-        </h1>
-        <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
-            Récemment diplômé en <span class="text-white font-semibold">BTS CIEL (ex SNIR)</span>. Je combine la logique du développement applicatif avec une passion rigoureuse pour l'administration systèmes, les architectures réseaux et la sécurité informatique.
-        </p>
-        
-        <a href="cv/cv_lucas_dubuis_pdf_alternance.pdf" target="_blank" class="inline-flex items-center gap-3 bg-accent text-dark px-8 py-4 rounded-xl font-extrabold uppercase text-xs tracking-wider hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_40px_rgba(0,210,255,0.25)] hover:shadow-[0_0_50px_rgba(0,210,255,0.4)]">
-            Télécharger mon CV Complet <i class="fas fa-file-pdf text-base"></i>
-        </a>
-    </header>
+<nav class="route" aria-label="Projets">
+  <ol>
+    <li><a href="#serveur-linux">Serveur Linux</a></li>
+    <li><a href="#pxe">Infrastructure PXE</a></li>
+    <li><a href="#ipv6">Réseau IPv6</a></li>
+    <li><a href="#securite">Sécurité</a></li>
+    <li><a href="#logs">Logs Python</a></li>
+  </ol>
+</nav>
 
-    <section class="pb-32 px-6 max-w-6xl mx-auto">
-        <div class="flex items-center gap-3 mb-10">
-            <div class="h-px bg-gradient-to-r from-accent to-transparent w-12"></div>
-            <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-accent">Laboratoire & Expérimentations</h2>
-        </div>
+<main>
+  <section class="hero" id="accueil" data-stop>
+    <h1><span><i>Tester.</i></span><span><i>Apprendre.</i></span></h1>
+    <p class="lede">Récemment diplômé en <strong>BTS CIEL (ex SNIR)</strong>. Je combine la logique du développement applicatif avec une passion rigoureuse pour l’administration systèmes, les architectures réseaux et la sécurité informatique.</p>
+    <p class="status">Admis à Epitech, profil alternant</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="cv/cv_lucas_dubuis_pdf_alternance.pdf" target="_blank" rel="noopener">Télécharger mon CV complet</a>
+      <a class="btn btn-ghost" href="#projets">Voir les projets</a>
+    </div>
+  </section>
 
-        <div class="grid md:grid-cols-2 gap-6">
-
-            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-accent/5 rounded-xl flex items-center justify-center text-accent border border-accent/10 group-hover:bg-accent group-hover:text-dark transition-all duration-300">
-                            <i class="fas fa-terminal text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white tracking-tight">Serveur Linux Autogéré</h3>
-                            <p class="text-xs text-gray-500 font-medium mt-0.5">Recyclage matériel & Hosting Privé</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-accent group-hover:rotate-180 transition-all duration-300 text-xs"></i>
-                </div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">Transformation complète d'une machine physique grand public en serveur Linux dédié à l'hébergement de services (Minecraft).</p>
-                
-                <div class="details border-t border-white/5 pt-5 text-sm">
-                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
-                    <ul class="space-y-2.5 text-gray-400">
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-accent text-[10px] mt-1"></i> <span><strong>OS :</strong> Installation et durcissement d'une distribution Debian Server (CLI uniquement).</span></li>
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-accent text-[10px] mt-1"></i> <span><strong>Réseau :</strong> Configuration IP statique LAN, routage et translation d'adresses (NAT/PAT) sur passerelle résidentielle.</span></li>
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-accent text-[10px] mt-1"></i> <span><strong>Optimisation :</strong> Paramétrage des arguments de la JVM (Java Virtual Machine) pour la gestion dynamique des allocations de mémoire RAM.</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-emerald-500/5 rounded-xl flex items-center justify-center text-emerald-400 border border-emerald-500/10 group-hover:bg-emerald-500 group-hover:text-dark transition-all duration-300">
-                            <i class="fas fa-server text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white tracking-tight">Infrastructure PXE</h3>
-                            <p class="text-xs text-gray-500 font-medium mt-0.5">Automatisation de déploiement réseau</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-emerald-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
-                </div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">Mise en place d'un environnement réseau permettant l'installation d'architectures OS sans support physique local.</p>
-                
-                <div class="details border-t border-white/5 pt-5 text-sm">
-                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
-                    <ul class="space-y-2.5 text-gray-400 mb-5">
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-emerald-400 text-[10px] mt-1"></i> <span>Gestion des chargeurs d'amorçage réseau (Syslinux / GRUB Netboot) pour proposer des installations multisystèmes.</span></li>
-                    </ul>
-                    <a href="https://github.com/lucasdbsfrost/Serveur-pxe-dubuisXgadeau" target="_blank" class="inline-flex items-center gap-2 text-white bg-white/5 hover:bg-emerald-500 hover:text-dark px-4 py-2 rounded-xl transition-all text-[10px] font-bold uppercase tracking-wider border border-white/5">
-                        Consulter la documentation <i class="fab fa-github text-xs"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-blue-500/5 rounded-xl flex items-center justify-center text-blue-400 border border-blue-500/10 group-hover:bg-blue-500 group-hover:text-dark transition-all duration-300">
-                            <i class="fas fa-network-wired text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white tracking-tight">Maquette Réseau IPv6</h3>
-                            <p class="text-xs text-gray-500 font-medium mt-0.5">Simulation d'architectures routées</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-blue-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
-                </div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">Conception complète et routage d’une topologie réseau complexe sous l'environnement Cisco Packet Tracer.</p>
-                
-                <div class="details border-t border-white/5 pt-5 text-sm">
-                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
-                    <ul class="space-y-2.5 text-gray-400">
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-blue-400 text-[10px] mt-1"></i> <span>Mise en œuvre du routage statique et dynamique inter-routeurs basé intégralement sur l'adressage IPv6.</span></li>
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-blue-400 text-[10px] mt-1"></i> <span>Configuration des mécanismes d'auto-configuration d'adresses de type <strong>SLAAC</strong> (Stateless Address Autoconfiguration) et d'annonces de routeurs (RA).</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-red-500/5 rounded-xl flex items-center justify-center text-red-400 border border-red-500/10 group-hover:bg-red-500 group-hover:text-dark transition-all duration-300">
-                            <i class="fas fa-shield-virus text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white tracking-tight">Lab Sécurité & Hardening</h3>
-                            <p class="text-xs text-gray-500 font-medium mt-0.5">Audit et protection d'environnements virtualisés</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-red-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
-                </div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">Auditer l'exposition d'un système virtualisé pour appliquer les règles de filtrage réseau adaptées.</p>
-                
-                <div class="details border-t border-white/5 pt-5 text-sm">
-                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
-                    <ul class="space-y-2.5 text-gray-400">
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-red-400 text-[10px] mt-1"></i> <span><strong>Reconnaissance :</strong> Utilisation de l'outil Nmap (scans SYN, détection de bannières et de versions de services applicatifs).</span></li>
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-red-400 text-[10px] mt-1"></i> <span><strong>Filtrage :</strong> Écriture de politiques restrictives sur le pare-feu applicatif hôte via l'utilitaire de configuration UFW (Iptables backend).</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="expand-card p-8 rounded-2xl group cursor-pointer">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-purple-500/5 rounded-xl flex items-center justify-center text-purple-400 border border-purple-500/10 group-hover:bg-purple-500 group-hover:text-dark transition-all duration-300">
-                            <i class="fas fa-code text-lg"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white tracking-tight">Analyseur de Logs Python</h3>
-                            <p class="text-xs text-gray-500 font-medium mt-0.5">Scripting au service de la supervision</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down text-gray-600 group-hover:text-purple-400 group-hover:rotate-180 transition-all duration-300 text-xs"></i>
-                </div>
-                <p class="text-gray-400 text-sm font-medium leading-relaxed">Développement de scripts légers d'automatisation dédiés au traitement de fichiers volumineux et à la détection d'anomalies.</p>
-                
-                <div class="details border-t border-white/5 pt-5 text-sm">
-                    <h4 class="text-xs uppercase font-bold tracking-wider text-white mb-3">Détails d'implémentation :</h4>
-                    <ul class="space-y-2.5 text-gray-400">
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-purple-400 text-[10px] mt-1"></i> <span>Parsing de fichiers systèmes (`/var/log/auth.log`, serveurs Web) à l'aide d'expressions régulières (Regex) en Python.</span></li>
-                        <li class="flex items-start gap-2.5"><i class="fas fa-check text-purple-400 text-[10px] mt-1"></i> <span>Extraction automatisée des adresses IP suspectes effectuant des requêtes malveillantes ou des tentatives d'intrusion répétées (Brute-force).</span></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
+  <div id="projets">
+    <section class="hop" id="serveur-linux" data-stop>
+      <div class="sheet">
+        <h2 class="group-title">Laboratoire &amp; expérimentations</h2>
+        <h3>Serveur Linux autogéré</h3>
+        <p class="sub">Recyclage matériel &amp; hosting privé</p>
+        <p>Transformation complète d’une machine physique grand public en serveur Linux dédié à l’hébergement de services (Minecraft).</p>
+        <h4>Détails d’implémentation</h4>
+        <ul>
+          <li><strong>OS :</strong> installation et durcissement d’une distribution Debian Server (CLI uniquement).</li>
+          <li><strong>Réseau :</strong> configuration IP statique LAN, routage et translation d’adresses (NAT/PAT) sur passerelle résidentielle.</li>
+          <li><strong>Optimisation :</strong> paramétrage des arguments de la JVM (Java Virtual Machine) pour la gestion dynamique des allocations de mémoire RAM.</li>
+        </ul>
+      </div>
     </section>
 
-    <footer class="py-16 text-center border-t border-white/5 bg-black/40">
-        <div class="text-[10px] font-mono text-gray-600 uppercase tracking-[0.6em]">
-            Curiosité • Rigueur • Technique — 2026
-        </div>
-    </footer>
+    <section class="hop" id="pxe" data-stop>
+      <div class="sheet">
+        <h3>Infrastructure PXE</h3>
+        <p class="sub">Automatisation de déploiement réseau</p>
+        <p>Mise en place d’un environnement réseau permettant l’installation d’architectures OS sans support physique local.</p>
+        <h4>Détails d’implémentation</h4>
+        <ul>
+          <li>Gestion des chargeurs d’amorçage réseau (Syslinux / GRUB Netboot) pour proposer des installations multisystèmes.</li>
+        </ul>
+        <a class="doc-link" href="https://github.com/lucasdbsfrost/Serveur-pxe-dubuisXgadeau" target="_blank" rel="noopener">Consulter la documentation sur GitHub</a>
+      </div>
+    </section>
 
+    <section class="hop" id="ipv6" data-stop>
+      <div class="sheet">
+        <h3>Maquette réseau IPv6</h3>
+        <p class="sub">Simulation d’architectures routées</p>
+        <p>Conception complète et routage d’une topologie réseau complexe sous l’environnement Cisco Packet Tracer.</p>
+        <h4>Détails d’implémentation</h4>
+        <ul>
+          <li>Mise en œuvre du routage statique et dynamique inter-routeurs basé intégralement sur l’adressage IPv6.</li>
+          <li>Configuration des mécanismes d’auto-configuration d’adresses de type <strong>SLAAC</strong> (Stateless Address Autoconfiguration) et d’annonces de routeurs (RA).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="hop" id="securite" data-stop>
+      <div class="sheet">
+        <h3>Lab sécurité &amp; hardening</h3>
+        <p class="sub">Audit et protection d’environnements virtualisés</p>
+        <p>Auditer l’exposition d’un système virtualisé pour appliquer les règles de filtrage réseau adaptées.</p>
+        <h4>Détails d’implémentation</h4>
+        <ul>
+          <li><strong>Reconnaissance :</strong> utilisation de l’outil Nmap (scans SYN, détection de bannières et de versions de services applicatifs).</li>
+          <li><strong>Filtrage :</strong> écriture de politiques restrictives sur le pare-feu applicatif hôte via l’utilitaire de configuration UFW (Iptables backend).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="hop" id="logs" data-stop>
+      <div class="sheet">
+        <h3>Analyseur de logs Python</h3>
+        <p class="sub">Scripting au service de la supervision</p>
+        <p>Développement de scripts légers d’automatisation dédiés au traitement de fichiers volumineux et à la détection d’anomalies.</p>
+        <h4>Détails d’implémentation</h4>
+        <ul>
+          <li>Parsing de fichiers systèmes (<code>/var/log/auth.log</code>, serveurs Web) à l’aide d’expressions régulières (Regex) en Python.</li>
+          <li>Extraction automatisée des adresses IP suspectes effectuant des requêtes malveillantes ou des tentatives d’intrusion répétées (brute-force).</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <section class="contact" id="contact" data-stop>
+    <div class="sheet">
+      <h2>Me joindre directement</h2>
+      <a class="tel" href="tel:0683004903">06 83 00 49 03</a>
+      <p class="place">Marseille &amp; alentours</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="cv/cv_lucas_dubuis_pdf_alternance.pdf" target="_blank" rel="noopener">Télécharger mon CV complet</a>
+        <a class="btn btn-ghost" href="https://github.com/lucasdbsfrost" target="_blank" rel="noopener">Voir mon GitHub</a>
+      </div>
+    </div>
+    <footer class="foot">
+      <span>Curiosité, rigueur, technique</span>
+      <span>2026</span>
+    </footer>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var canvas = document.getElementById('scene');
+  var stops = Array.prototype.slice.call(document.querySelectorAll('[data-stop]'));
+  var railLinks = Array.prototype.slice.call(document.querySelectorAll('.route a'));
+  var mqLight = window.matchMedia('(prefers-color-scheme: light)');
+  var mqMobile = window.matchMedia('(max-width: 860px)');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ------------------------------------------------------------------
+     Défilement : chaque section [data-stop] est une étape du trajet.
+     t = 0 (accueil), 1 à 5 (projets), 6 (contact), avec les fractions
+     entre deux étapes.
+  ------------------------------------------------------------------ */
+  var anchors = [];
+  function measure() {
+    var vh = window.innerHeight;
+    var max = Math.max(1, root.scrollHeight - vh);
+    anchors = stops.map(function (el) {
+      var top = el.getBoundingClientRect().top + window.scrollY;
+      var a = mqMobile.matches ? top : top + el.offsetHeight / 2 - vh / 2;
+      return Math.min(max, Math.max(0, a));
+    });
+    anchors[0] = 0;
+    for (var i = 1; i < anchors.length; i++) {
+      if (anchors[i] <= anchors[i - 1]) anchors[i] = anchors[i - 1] + 1;
+    }
+  }
+  function routeT() {
+    var s = window.scrollY, n = anchors.length;
+    if (s <= anchors[0]) return 0;
+    for (var i = 0; i < n - 1; i++) {
+      if (s < anchors[i + 1]) return i + (s - anchors[i]) / (anchors[i + 1] - anchors[i]);
+    }
+    return n - 1;
+  }
+  function smooth(x) { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); }
+  function easedT(t) {
+    var n = anchors.length;
+    var i = Math.min(Math.floor(t), n - 2), f = t - i;
+    var a = mqMobile.matches ? 0.25 : 0.2, b = mqMobile.matches ? 0.95 : 0.8;
+    f = reduce ? (f < 0.5 ? 0 : 1) : smooth((f - a) / (b - a));
+    return { i: i, f: f, v: i + f };
+  }
+
+  var lastActive = -2;
+  function updateRail(v) {
+    var active = Math.round(v) - 1;              // -1 accueil, 0..4 projets, 5 contact
+    if (active === lastActive) return;
+    lastActive = active;
+    root.classList.toggle('on-route', active >= 0 && active < railLinks.length);
+    railLinks.forEach(function (a, i) {
+      if (i === active) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      a.classList.toggle('done', i < active);
+    });
+  }
+
+  measure();
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+  function fallback() {
+    root.classList.add('no-webgl');
+    measure();
+    var tick = function () { updateRail(easedT(routeT()).v); };
+    window.addEventListener('scroll', tick, { passive: true });
+    tick();
+  }
+
+  if (!window.THREE) { fallback(); return; }
+  var THREE = window.THREE, renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: 'high-performance' });
+  } catch (e) { fallback(); return; }
+
+  /* ------------------------------------------------------------------
+     Matériaux et thèmes (les couleurs suivent le mode clair / sombre)
+  ------------------------------------------------------------------ */
+  var THEMES = {
+    dark:  { bg: 0x0B1020, body: 0x1C2644, hi: 0x36446F, edge: 0xA6B6DC, dot: 0x46537F, link: 0x3A4772,
+             amber: 0xFFB224, alert: 0xFF5A4F, sky: 0xC8D6FF, ground: 0x0B1020, hemi: 0.95, sun: 0.75 },
+    light: { bg: 0xECEEF2, body: 0xFFFFFF, hi: 0xC6CDDB, edge: 0x0E1424, dot: 0xAEB6C6, link: 0xA7B0C2,
+             amber: 0xF2A100, alert: 0xD43A2F, sky: 0xFFFFFF, ground: 0xB9C0CE, hemi: 0.9, sun: 0.4 }
+  };
+  var M = {
+    body:  new THREE.MeshLambertMaterial(),
+    hi:    new THREE.MeshLambertMaterial(),
+    amber: new THREE.MeshBasicMaterial(),
+    alert: new THREE.MeshBasicMaterial(),
+    edge:  new THREE.LineBasicMaterial(),
+    dot:   new THREE.PointsMaterial({ size: 2, sizeAttenuation: false })
+  };
+  var amberClones = [];                  // matériaux ambre transparents (ondes RA)
+  var cLink = new THREE.Color(), cAmber = new THREE.Color();
+
+  var scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x000000, 10, 50);
+  var camera = new THREE.PerspectiveCamera(35, 1, 0.1, 200);
+  var hemi = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  var sun = new THREE.DirectionalLight(0xffffff, 0.7);
+  sun.position.set(6, 10, 8);
+  scene.add(hemi, sun);
+
+  function applyTheme() {
+    var T = mqLight.matches ? THEMES.light : THEMES.dark;
+    renderer.setClearColor(T.bg, 1);
+    scene.fog.color.setHex(T.bg);
+    M.body.color.setHex(T.body); M.hi.color.setHex(T.hi);
+    M.amber.color.setHex(T.amber); M.alert.color.setHex(T.alert);
+    M.edge.color.setHex(T.edge); M.dot.color.setHex(T.dot);
+    amberClones.forEach(function (m) { m.color.setHex(T.amber); });
+    cLink.setHex(T.link); cAmber.setHex(T.amber);
+    hemi.color.setHex(T.sky); hemi.groundColor.setHex(T.ground);
+    hemi.intensity = T.hemi; sun.intensity = T.sun;
+  }
+
+  /* ------------------------------------------------------------------
+     Petit kit de construction : fusionne les volumes statiques d'un
+     objet en un maillage par matériau (peu d'appels de rendu = fluide
+     sur téléphone) et trace leurs arêtes.
+  ------------------------------------------------------------------ */
+  var ONE = new THREE.Vector3(1, 1, 1);
+  function merge(list, withNormals) {
+    var n = 0, o = 0;
+    list.forEach(function (g) { n += g.attributes.position.count; });
+    var pos = new Float32Array(n * 3), nor = withNormals ? new Float32Array(n * 3) : null;
+    list.forEach(function (g) {
+      pos.set(g.attributes.position.array, o * 3);
+      if (nor) nor.set(g.attributes.normal.array, o * 3);
+      o += g.attributes.position.count;
+    });
+    var out = new THREE.BufferGeometry();
+    out.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    if (nor) out.setAttribute('normal', new THREE.BufferAttribute(nor, 3));
+    return out;
+  }
+  function Kit() { this.p = { body: [], hi: [], amber: [], alert: [] }; this.e = []; }
+  Kit.prototype.add = function (geo, role, x, y, z, rot, edges) {
+    var q = new THREE.Quaternion();
+    if (rot) q.setFromEuler(new THREE.Euler(rot[0], rot[1], rot[2]));
+    geo.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), q, ONE));
+    if (edges !== false) this.e.push(new THREE.EdgesGeometry(geo, 28));
+    this.p[role].push(geo.index ? geo.toNonIndexed() : geo);
+    return this;
+  };
+  Kit.prototype.box = function (w, h, d, role, x, y, z, rot, edges) {
+    return this.add(new THREE.BoxGeometry(w, h, d), role, x, y, z, rot, edges);
+  };
+  Kit.prototype.cyl = function (r, h, role, x, y, z, seg, edges) {
+    return this.add(new THREE.CylinderGeometry(r, r, h, seg || 32), role, x, y, z, null, edges);
+  };
+  Kit.prototype.ribbon = function (x1, z1, x2, z2) {
+    var dx = x2 - x1, dz = z2 - z1, L = Math.sqrt(dx * dx + dz * dz);
+    return this.add(new THREE.BoxGeometry(L, 0.03, 0.07), 'hi', (x1 + x2) / 2, 0.02, (z1 + z2) / 2,
+      [0, Math.atan2(-dz, dx), 0], false);
+  };
+  Kit.prototype.build = function (parent) {
+    var g = new THREE.Group(), self = this;
+    Object.keys(this.p).forEach(function (role) {
+      if (self.p[role].length) g.add(new THREE.Mesh(merge(self.p[role], true), M[role]));
+    });
+    if (this.e.length) g.add(new THREE.LineSegments(merge(this.e, false), M.edge));
+    if (parent) parent.add(g);
+    return g;
+  };
+  function inner(parent, x, z) {
+    var g = new THREE.Group(); g.position.set(x, 0, z); parent.add(g); return g;
+  }
+  function piece(geo, mat, withEdges) {
+    var m = new THREE.Mesh(geo, mat);
+    if (withEdges) m.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 28), M.edge));
+    return m;
+  }
+  function hash(n) { var s = Math.sin(n * 127.1 + 11.7) * 43758.5453; return s - Math.floor(s); }
+  function clamp01(x) { return Math.min(1, Math.max(0, x)); }
+  function outBack(x) { x = clamp01(x); var c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); }
+  function outCubic(x) { x = clamp01(x); return 1 - Math.pow(1 - x, 3); }
+
+  /* ------------------------------------------------------------------
+     Le réseau : un commutateur central, cinq machines, cinq câbles
+  ------------------------------------------------------------------ */
+  var NODES = [[-9, 2], [-3, -8], [6, -11], [12, -2], [5, 7]];
+  var CABLES = [
+    [[-1.6, 0.2], [-9, 0.2], [-9, 2]],
+    [[-0.8, -0.5], [-0.8, -8], [-3, -8]],
+    [[0.8, -0.5], [0.8, -11], [6, -11]],
+    [[1.6, -0.2], [12, -0.2], [12, -2]],
+    [[0.4, 0.5], [0.4, 7], [5, 7]]
+  ];
+  var updaters = [];                      // animations propres à chaque machine
+
+  // Sol : grille de points
+  (function () {
+    var R = 40, pts = [];
+    for (var x = -R; x <= R; x++) for (var z = -R; z <= R; z++) pts.push(x, 0, z);
+    var g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pts), 3));
+    scene.add(new THREE.Points(g, M.dot));
+  })();
+
+  // Commutateur
+  var gSwitch = new THREE.Group(); scene.add(gSwitch);
+  var leds = [];
+  (function () {
+    var k = new Kit();
+    k.box(3.2, 0.5, 1.0, 'body', 0, 0.25, 0);
+    for (var i = 0; i < 8; i++) k.box(0.24, 0.2, 0.04, 'hi', -1.26 + i * 0.36, 0.19, 0.51);
+    k.build(gSwitch);
+    var lg = new THREE.BoxGeometry(0.1, 0.05, 0.03);
+    for (var j = 0; j < 8; j++) {
+      var led = new THREE.Mesh(lg, M.amber);
+      led.position.set(-1.26 + j * 0.36, 0.39, 0.51);
+      gSwitch.add(led); leds.push(led);
+    }
+  })();
+
+  // Câbles et paquets
+  var cables = CABLES.map(function (path, ci) {
+    var mat = new THREE.MeshBasicMaterial();
+    var segs = [], total = 0;
+    for (var i = 0; i < path.length - 1; i++) {
+      var a = path[i], b = path[i + 1];
+      var dx = b[0] - a[0], dz = b[1] - a[1], len = Math.sqrt(dx * dx + dz * dz);
+      var geo = new THREE.BoxGeometry(1, 0.03, 0.08); geo.translate(0.5, 0, 0);
+      var mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(a[0], 0.02, a[1]);
+      mesh.rotation.y = Math.atan2(-dz, dx);
+      mesh.scale.x = 0.0001;
+      scene.add(mesh);
+      segs.push({ a: a, dx: dx, dz: dz, len: len, cum: total, mesh: mesh });
+      total += len;
+    }
+    var packets = [0, 1].map(function (j) {
+      var p = new THREE.Mesh(new THREE.BoxGeometry(0.17, 0.17, 0.17), M.amber);
+      p.visible = false; scene.add(p);
+      return { mesh: p, u: hash(ci * 7 + j), dir: j ? -1 : 1 };
+    });
+    return { mat: mat, segs: segs, total: total, packets: packets };
+  });
+  function cablePoint(c, u, out) {
+    var d = u * c.total;
+    for (var i = 0; i < c.segs.length; i++) {
+      var s = c.segs[i];
+      if (d <= s.cum + s.len || i === c.segs.length - 1) {
+        var f = (d - s.cum) / s.len;
+        out.set(s.a[0] + s.dx * f, 0.12, s.a[1] + s.dz * f);
+        return;
+      }
+    }
+  }
+
+  var nodes = NODES.map(function (p) {
+    var g = new THREE.Group(); g.position.set(p[0], 0, p[1]); g.scale.setScalar(0.0001);
+    scene.add(g); return g;
+  });
+
+  // 1. Serveur Linux autogéré : une tour recyclée, sa passerelle, le service hébergé
+  (function (g) {
+    var k = new Kit();
+    k.box(1.1, 2.3, 2.1, 'body', -0.7, 1.15, -0.2);
+    k.box(0.8, 0.26, 0.05, 'hi', -0.7, 1.92, 0.86);
+    k.box(0.8, 0.26, 0.05, 'hi', -0.7, 1.58, 0.86);
+    for (var i = 0; i < 6; i++) k.box(0.8, 0.045, 0.04, 'hi', -0.7, 0.3 + i * 0.13, 0.86, null, false);
+    k.box(0.09, 0.09, 0.04, 'amber', -0.38, 2.15, 0.86, null, false);
+    k.box(1.15, 0.26, 0.78, 'body', 1.25, 0.13, 0.5);
+    k.cyl(0.035, 0.8, 'hi', 0.82, 0.62, 0.2, 8);
+    k.cyl(0.035, 0.8, 'hi', 1.68, 0.62, 0.2, 8);
+    for (var j = 0; j < 3; j++) k.box(0.07, 0.05, 0.03, 'amber', 0.95 + j * 0.16, 0.15, 0.9, null, false);
+    k.ribbon(-0.15, 0.5, 0.68, 0.5);
+    g = inner(g, -1.0, -0.4);                 // la passerelle se pose sur l'arrivée du câble
+    k.build(g);
+    var cube = piece(new THREE.BoxGeometry(0.58, 0.58, 0.58), M.body, true);
+    g.add(cube);
+    updaters.push(function (t) {
+      cube.position.set(-0.7, 3.15 + Math.sin(t * 1.4) * 0.1, -0.2);
+      cube.rotation.set(t * 0.5, t * 0.8, 0);
+    });
+  })(nodes[0]);
+
+  // 2. Infrastructure PXE : un serveur déploie le système sur quatre postes sans disque
+  (function (g) {
+    g = inner(g, 0, 1.3);                     // le serveur se pose sur l'arrivée du câble
+    var k = new Kit(), sz = -1.3;
+    for (var u = 0; u < 3; u++) {
+      k.box(2.4, 0.42, 1.3, 'body', 0, 0.21 + u * 0.46, sz);
+      k.box(1.5, 0.2, 0.04, 'hi', -0.3, 0.21 + u * 0.46, sz + 0.66);
+      k.box(0.08, 0.08, 0.04, 'amber', 0.95, 0.21 + u * 0.46, sz + 0.66, null, false);
+    }
+    var bars = [], pk = [], bg = new THREE.BoxGeometry(0.7, 0.07, 0.02); bg.translate(0.35, 0, 0);
+    [-54, -18, 18, 54].forEach(function (deg, i) {
+      var a = deg * Math.PI / 180, cx = Math.sin(a) * 2.4, cz = -0.9 + Math.cos(a) * 2.4;
+      k.ribbon(0, sz + 0.65, cx, cz);
+      var mk = new Kit();
+      mk.box(0.5, 0.04, 0.3, 'body', 0, 0.02, 0);
+      mk.box(0.07, 0.42, 0.07, 'body', 0, 0.23, -0.02);
+      mk.box(0.98, 0.64, 0.06, 'body', 0, 0.76, 0);
+      mk.box(0.84, 0.5, 0.02, 'hi', 0, 0.76, 0.035, null, false);
+      var mg = mk.build(g); mg.position.set(cx, 0, cz); mg.rotation.y = a;
+      var bar = new THREE.Mesh(bg, M.amber); bar.position.set(-0.35, 0.62, 0.055); mg.add(bar); bars.push(bar);
+      var p = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.15, 0.15), M.amber); g.add(p);
+      pk.push({ mesh: p, x: cx, z: cz });
+    });
+    k.build(g);
+    updaters.push(function (t) {
+      var c = t % 9;
+      for (var i = 0; i < 4; i++) {
+        var f = clamp01((c - i * 1.6) / 1.6);
+        bars[i].scale.x = Math.max(0.0001, c > 8.4 ? 0.0001 : f);
+        var p = pk[i], on = f > 0 && f < 1, m = (f * 3) % 1;
+        p.mesh.visible = on;
+        if (on) p.mesh.position.set(p.x * m, 0.12, (sz + 0.65) + (p.z - (sz + 0.65)) * m);
+      }
+    });
+  })(nodes[1]);
+
+  // 3. Maquette IPv6 : quatre routeurs maillés, annonces RA en ondes
+  (function (g) {
+    var k = new Kit(), R = 1.9, pos = [[R, 0], [0, R], [-R, 0], [0, -R]];
+    pos.forEach(function (p) {
+      k.cyl(0.72, 0.36, 'body', p[0], 0.18, p[1], 36);
+      k.box(1.0, 0.03, 0.12, 'hi', p[0], 0.375, p[1], null, false);
+      k.box(0.12, 0.03, 1.0, 'hi', p[0], 0.375, p[1], null, false);
+      k.box(0.09, 0.07, 0.03, 'amber', p[0], 0.2, p[1] + 0.725, null, false);
+    });
+    var links = [[0, 1], [1, 2], [2, 3], [3, 0], [0, 2], [1, 3]];
+    links.forEach(function (l) { k.ribbon(pos[l[0]][0], pos[l[0]][1], pos[l[1]][0], pos[l[1]][1]); });
+    k.build(g);
+    var pk = links.map(function (l, i) {
+      var p = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.15, 0.15), M.amber); g.add(p);
+      var L = Math.sqrt(Math.pow(pos[l[0]][0] - pos[l[1]][0], 2) + Math.pow(pos[l[0]][1] - pos[l[1]][1], 2));
+      return { mesh: p, a: pos[l[0]], b: pos[l[1]], ph: hash(i + 40), sp: 0.22 + hash(i + 50) * 0.12, m: 0.8 / L };
+    });
+    var rg = new THREE.RingGeometry(0.76, 0.82, 56); rg.rotateX(-Math.PI / 2);
+    var rings = pos.map(function (p, i) {
+      var mat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false });
+      amberClones.push(mat);
+      var r = new THREE.Mesh(rg, mat); r.position.set(p[0], 0.04, p[1]); g.add(r);
+      return { mesh: r, mat: mat, ph: i * 0.25 };
+    });
+    updaters.push(function (t) {
+      pk.forEach(function (p) {
+        var u = (t * p.sp + p.ph) % 1;
+        p.mesh.position.set(p.a[0] + (p.b[0] - p.a[0]) * u, 0.12, p.a[1] + (p.b[1] - p.a[1]) * u);
+        p.mesh.visible = u > p.m && u < 1 - p.m;      // masqué à l'intérieur des routeurs
+      });
+      rings.forEach(function (r) {
+        var u = (t * 0.35 + r.ph) % 1;
+        r.mesh.scale.setScalar(1 + u * 0.95);
+        r.mat.opacity = (1 - u) * 0.75;
+      });
+    });
+  })(nodes[2]);
+
+  // 4. Lab sécurité : un hôte derrière son pare-feu, un seul port ouvert
+  (function (g) {
+    var k = new Kit(), wz = 1.2;
+    k.box(1.4, 1.4, 1.4, 'body', 0, 0.7, -1.0);
+    k.box(1.0, 0.5, 0.04, 'hi', 0, 0.9, -0.29);
+    k.box(0.09, 0.09, 0.04, 'amber', 0.45, 0.3, -0.29, null, false);
+    for (var r = 0; r < 5; r++) {
+      var odd = r % 2, n = odd ? 6 : 7, x0 = odd ? -1.55 : -1.86;
+      for (var c = 0; c < n; c++) {
+        if (r === 2 && c === 3) continue;                    // le port autorisé
+        k.box(0.6, 0.28, 0.3, 'hi', x0 + c * 0.62, 0.15 + r * 0.3, wz);
+      }
+    }
+    k.build(g);
+    var pg = new THREE.BoxGeometry(0.17, 0.17, 0.17), T = 3.4;
+    var pk = [0, 1, 2, 3, 4, 5].map(function (i) {
+      var p = new THREE.Mesh(pg, M.amber); g.add(p); return p;
+    });
+    updaters.push(function (t) {
+      pk.forEach(function (p, i) {
+        var tt = t + i * (T / 6), c = Math.floor(tt / T), u = (tt % T) / T;
+        var pass = (i + c) % 3 === 0;
+        var xt = pass ? 0 : (hash(i * 13 + c) * 3.2 - 1.6), yt = pass ? 0.75 : 0.25 + hash(i * 29 + c * 3) * 1.1;
+        if (!pass && Math.abs(xt) < 0.45 && Math.abs(yt - 0.75) < 0.3) xt += 0.8;
+        var s = 1;
+        if (u < 0.55) {
+          var a = u / 0.55;
+          p.material = M.amber;
+          p.position.set(xt * (1.35 - 0.35 * a), yt + (1 - a) * 0.4, 4.6 + (wz + 0.26 - 4.6) * a);
+          s = clamp01(a * 6);
+        } else if (pass) {
+          var b = (u - 0.55) / 0.45;
+          p.material = M.amber;
+          p.position.set(0, 0.75, (wz + 0.26) + (-0.35 - (wz + 0.26)) * clamp01(b / 0.7));
+          s = 1 - clamp01((b - 0.7) / 0.3);
+        } else {
+          var v = (u - 0.55) / 0.45;
+          p.material = M.alert;
+          p.position.set(xt, Math.max(0.09, yt - v * v * 3.2), wz + 0.26 + Math.sin(clamp01(v * 2) * Math.PI / 2) * 0.55);
+          s = 1 - clamp01((v - 0.6) / 0.4);
+        }
+        p.scale.setScalar(Math.max(0.0001, s));
+      });
+    });
+  })(nodes[3]);
+
+  // 5. Analyseur de logs : un balayage ligne à ligne, les lignes suspectes sont extraites
+  (function (g) {
+    var base = new Kit();
+    base.box(1.5, 0.1, 0.8, 'body', 0, 0.05, 0);
+    base.box(0.14, 0.5, 0.14, 'body', 0, 0.3, -0.05);
+    base.build(g);
+    var tilt = new THREE.Group(); tilt.position.set(0, 0.5, 0); tilt.rotation.x = -0.13; g.add(tilt);
+    var k = new Kit();
+    k.box(2.6, 3.0, 0.1, 'body', 0, 1.5, 0);
+    var W = [1.9, 1.3, 2.1, 1.6, 0.9, 2.0, 1.4, 1.8, 1.1, 2.2, 1.5, 1.7, 1.0], bad = { 2: 1, 6: 1, 9: 1 }, sus = [];
+    W.forEach(function (w, r) {
+      var y = 2.72 - r * 0.2;
+      if (bad[r]) {
+        var m = new THREE.Mesh(new THREE.BoxGeometry(w, 0.09, 0.04), M.hi);
+        m.position.set(-1.12 + w / 2, y, 0.07); tilt.add(m); sus.push({ mesh: m, y: y, z: 0.07 });
+      } else {
+        k.box(w, 0.08, 0.03, 'hi', -1.12 + w / 2, y, 0.065, null, false);
+      }
+    });
+    k.build(tilt);
+    var scan = new THREE.Mesh(new THREE.BoxGeometry(2.74, 0.035, 0.05), M.amber); tilt.add(scan);
+    updaters.push(function (t, dt) {
+      var c = t % 6.5, u = clamp01(c / 4.2), y = 2.92 - u * 2.84;
+      scan.position.set(0, y, 0.1); scan.visible = c < 4.2;
+      sus.forEach(function (s) {
+        var hit = c < 6.1 && y < s.y;
+        s.mesh.material = hit ? M.alert : M.hi;
+        s.z += ((hit ? 0.5 : 0.07) - s.z) * Math.min(1, dt * 7);
+        s.mesh.position.z = s.z;
+      });
+    });
+  })(nodes[4]);
+
+  /* ------------------------------------------------------------------
+     Caméra : une image clé par étape. R = rayon à cadrer [large, étroit],
+     s = décalage de l'objet à l'écran pour laisser la place au texte.
+  ------------------------------------------------------------------ */
+  function V(x, y, z) { return new THREE.Vector3(x, y, z); }
+  function at(i, x, y, z) { return V(NODES[i][0] + x, y, NODES[i][1] + z); }
+  var KF = [
+    { tg: V(1.2, 0.3, -1.6),   dir: V(0.36, 0.36, 0.86),  R: [8.6, 6.8], sx: [0.17, 0.03], sy: [-0.2, -0.3] },
+    { tg: at(0, -0.8, 1.45, -0.4), dir: V(0.56, 0.3, 0.77), R: [3.1, 2.9], sx: [0.17, 0], sy: [0.02, -0.2] },
+    { tg: at(1, 0, 0.7, 1.2),  dir: V(-0.34, 0.44, 0.83), R: [3.2, 3.0], sx: [0.17, 0],  sy: [0, -0.2] },
+    { tg: at(2, 0, 0.2, 0),    dir: V(0.26, 0.6, 0.76),   R: [3.7, 3.1], sx: [0.19, 0],  sy: [0, -0.2] },
+    { tg: at(3, 0, 0.75, 1.0), dir: V(0.3, 0.48, 0.82),   R: [3.5, 3.2], sx: [0.17, 0],  sy: [0, -0.2] },
+    { tg: at(4, 0, 1.9, 0),    dir: V(0.4, 0.22, 0.89),   R: [2.7, 2.5], sx: [0.18, 0],  sy: [0, -0.2] },
+    { tg: V(0.5, 0.4, -0.5),   dir: V(-0.5, 0.34, 0.8),   R: [8.2, 5.4], sx: [0.27, 0],  sy: [0.09, -0.18] }
+  ];
+  KF.forEach(function (k) { k.dir.normalize(); });
+
+  var W = 0, H = 0, aspect = 1, mobile = false;
+  var des = { tg: V(0, 0, 0), dir: V(0, 0, 1), dist: 20, sx: 0, sy: 0, R: 5 };
+  var cur = null;
+  function desired(e) {
+    var A = KF[e.i], B = KF[e.i + 1] || A, f = e.f, m = mobile ? 1 : 0;
+    var ux = mobile ? 0.92 : 0.5, uy = mobile ? 0.44 : 0.78;
+    var k = Math.tan(camera.fov * Math.PI / 360) * Math.min(uy, aspect * ux);
+    var R = A.R[m] + (B.R[m] - A.R[m]) * f;
+    des.tg.lerpVectors(A.tg, B.tg, f);
+    des.dir.lerpVectors(A.dir, B.dir, f).normalize();
+    des.R = R;
+    des.dist = R / k + Math.sin(Math.PI * f) * (mobile ? 7 : 5);
+    des.sx = A.sx[m] + (B.sx[m] - A.sx[m]) * f;
+    des.sy = A.sy[m] + (B.sy[m] - A.sy[m]) * f;
+  }
+
+  // Sur téléphone, l'accueil cadre le réseau dans l'espace libre entre le menu et le titre
+  var heroTitle = document.querySelector('.hero h1');
+  function fitHero() {
+    if (!mobile || !heroTitle || !H) return;
+    var navH = 56, top = heroTitle.getBoundingClientRect().top + window.scrollY;
+    var free = Math.max(80, top - navH);
+    KF[0].sy[1] = (navH + free / 2) / H - 0.5;
+    KF[0].R[1] = 5.4 * Math.min(1.7, Math.max(1, 0.44 / (free / H * 0.9)));
+  }
+
+  function resize() {
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    if (w === W && h === H) return;
+    W = w; H = h; aspect = w / h; mobile = mqMobile.matches;
+    var pr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setPixelRatio(pr);
+    renderer.setSize(w, h, false);
+    M.dot.size = 1.6 * pr;
+    camera.fov = mobile ? 42 : 35;
+    camera.aspect = aspect;
+    measure();
+    fitHero();
+  }
+
+  // Parallaxe : souris sur ordinateur, inclinaison du téléphone quand elle est disponible
+  var px = 0, py = 0, spx = 0, spy = 0, tilt0 = null;
+  window.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    px = (e.clientX / window.innerWidth) * 2 - 1;
+    py = (e.clientY / window.innerHeight) * 2 - 1;
+  }, { passive: true });
+  if (!reduce) {
+    window.addEventListener('deviceorientation', function (e) {
+      if (e.gamma == null || e.beta == null) return;
+      if (!tilt0) tilt0 = { g: e.gamma, b: e.beta };
+      px = Math.max(-1, Math.min(1, (e.gamma - tilt0.g) / 25));
+      py = Math.max(-1, Math.min(1, (e.beta - tilt0.b) / 25));
+    }, { passive: true });
+  }
+
+  /* ------------------------------------------------------------------
+     Boucle de rendu
+  ------------------------------------------------------------------ */
+  var clock = new THREE.Clock(), time = 0, boot = reduce ? 99 : 0, v3 = new THREE.Vector3();
+  var camPos = new THREE.Vector3();
+
+  function frame() {
+    requestAnimationFrame(frame);
+    resize();
+    var dt = Math.min(clock.getDelta(), 0.05);
+    if (!reduce) { time += dt; boot += dt; } else { time = 3.1; }
+
+    var e = easedT(routeT());
+    updateRail(e.v);
+    desired(e);
+    if (!cur) cur = { tg: des.tg.clone(), dir: des.dir.clone(), dist: des.dist, sx: des.sx, sy: des.sy, R: des.R };
+    var k = reduce ? 1 : 1 - Math.exp(-dt * 4.5);
+    cur.tg.lerp(des.tg, k); cur.dir.lerp(des.dir, k).normalize();
+    cur.dist += (des.dist - cur.dist) * k; cur.R += (des.R - cur.R) * k;
+    cur.sx += (des.sx - cur.sx) * k; cur.sy += (des.sy - cur.sy) * k;
+
+    var kp = 1 - Math.exp(-dt * 3);
+    spx += (px - spx) * kp; spy += (py - spy) * kp;
+    var sway = reduce ? 0 : Math.sin(time * 0.35) * 0.035;
+    var theta = Math.atan2(cur.dir.x, cur.dir.z) + spx * 0.1 + sway;
+    var phi = Math.asin(cur.dir.y) + spy * 0.05;
+    phi = Math.max(0.08, Math.min(1.3, phi));
+    camPos.set(Math.cos(phi) * Math.sin(theta), Math.sin(phi), Math.cos(phi) * Math.cos(theta))
+      .multiplyScalar(cur.dist).add(cur.tg);
+    camera.position.copy(camPos);
+    camera.lookAt(cur.tg);
+    camera.setViewOffset(W, H, -cur.sx * W, -cur.sy * H, W, H);
+    scene.fog.near = cur.dist + cur.R * 0.5;
+    scene.fog.far = scene.fog.near + 36;
+
+    // Démarrage : le commutateur, puis les câbles, puis les machines
+    gSwitch.scale.setScalar(Math.max(0.0001, outBack((boot - 0.15) / 0.6)));
+    var online = boot > 2.5;
+    cables.forEach(function (c, i) {
+      var prog = outCubic((boot - 0.6 - i * 0.09) / 0.95) * c.total;
+      c.segs.forEach(function (s) { s.mesh.scale.x = Math.max(0.0001, clamp01((prog - s.cum) / s.len) * s.len); });
+      nodes[i].scale.setScalar(Math.max(0.0001, outBack((boot - 1.35 - i * 0.14) / 0.6)));
+      // Le câble du projet en cours s'allume ; au contact, tout le réseau est actif
+      var w = Math.max(clamp01(1 - Math.abs(e.v - (i + 1))), clamp01(e.v - 5));
+      c.mat.color.copy(cLink).lerp(cAmber, w);
+      c.packets.forEach(function (p) {
+        p.mesh.visible = online;
+        p.u = (p.u + dt * (1.6 + w * 2.6) / c.total) % 1;
+        cablePoint(c, p.dir > 0 ? p.u : 1 - p.u, v3);
+        p.mesh.position.copy(v3);
+      });
+    });
+    leds.forEach(function (l, i) { l.visible = Math.sin(time * (3 + i * 0.7) + i * 2.1) > -0.35; });
+    for (var u = 0; u < updaters.length; u++) updaters[u](time, dt);
+
+    renderer.render(scene, camera);
+  }
+
+  applyTheme();
+  if (mqLight.addEventListener) mqLight.addEventListener('change', applyTheme);
+  else if (mqLight.addListener) mqLight.addListener(applyTheme);
+  window.addEventListener('resize', resize);
+  window.addEventListener('load', fitHero);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero);
+  resize();
+  root.classList.add('ready');
+  frame();
+})();
+</script>
 </body>
 </html>
