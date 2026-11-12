@@ -2,16 +2,16 @@
 node_modules/
 dist/
 
-# Variables d'environnement locales (jamais dans Git)
+# Variables d'environnement locales
 .env
 .env.*
 !.env.example
 
-# Dossier privé : reste sur ta machine, jamais publié
+# Dossier privé
 private/*
 !private/README.md
 
-# Divers
+# autre : 
 .DS_Store
 *.log
 .vite/
