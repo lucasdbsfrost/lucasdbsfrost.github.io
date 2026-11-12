@@ -1,0 +1,20 @@
+.contact {
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--nav-h) + 24px) var(--pad) 0;
+}
+.contact .sheet { max-width: 40rem; margin-block: auto; }
+.contact h2 { font-size: 1rem; letter-spacing: 0; font-weight: 600; color: var(--muted); margin-bottom: .6em; }
+.tel {
+  display: inline-block; white-space: nowrap; text-decoration: none;
+  font-size: clamp(2rem, 10.5vw, 6rem); font-weight: 800; line-height: 1; letter-spacing: -.04em;
+  transition: color .2s;
+}
+.tel:hover { color: var(--accent-ink); }
+.place { margin: .9em 0 1.8em; color: var(--muted); font-weight: 600; }
+.foot {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 22px 0 calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  color: var(--muted); font-size: .88rem;
+}

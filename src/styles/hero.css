@@ -1,0 +1,38 @@
+.hero {
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: calc(var(--nav-h) + 24px) var(--pad) clamp(28px, 7vh, 80px);
+}
+.hero h1 {
+  margin: 0 0 .28em;
+  font-size: clamp(2.6rem, 13vw, 7.6rem);
+  font-weight: 800; line-height: .9; letter-spacing: -.045em;
+}
+.hero h1 span { display: block; overflow: hidden; padding-bottom: .16em; margin-bottom: -.16em; }
+.hero h1 i {
+  display: block; font-style: normal;
+  transform: translateY(110%);
+  animation: rise 1s cubic-bezier(.2, .8, .2, 1) .25s forwards;
+}
+.hero h1 span + span i { animation-delay: .38s; }
+@keyframes rise { to { transform: none; } }
+
+.lede { max-width: 35rem; margin: 0 0 1.1em; }
+.lede strong { font-weight: 700; }
+.status {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 1.6em; font-weight: 600; color: var(--accent-ink);
+}
+.status::before { content: ""; width: 8px; height: 8px; background: var(--amber); flex: none; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 50px; padding: 0 24px; border-radius: 3px;
+  font-weight: 700; font-size: .96rem; text-decoration: none;
+  transition: background .2s, border-color .2s, color .2s, transform .15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--amber); color: var(--on-amber); }
+.btn-primary:hover { background: color-mix(in srgb, var(--amber) 82%, white); }
+.btn-ghost { border: 1px solid var(--line); color: var(--ink); background: rgb(var(--bg-rgb) / .35); }
+.btn-ghost:hover { border-color: var(--ink); }

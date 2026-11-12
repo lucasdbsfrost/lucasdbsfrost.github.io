@@ -1,0 +1,32 @@
+.hop {
+  min-height: 130vh;
+  display: flex; align-items: center;
+  padding: 0 var(--pad);
+}
+.sheet { width: 100%; max-width: 31rem; }
+.group-title { margin: 0 0 1.4em; font-size: 1rem; font-weight: 600; color: var(--muted); }
+.sheet h3, .contact h2 {
+  margin: 0 0 .3em;
+  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+  font-weight: 800; line-height: 1.03; letter-spacing: -.03em;
+}
+.sub { margin: 0 0 1.1em; font-weight: 600; color: var(--accent-ink); }
+.sheet p { margin: 0 0 1.2em; }
+.sheet h4 { margin: 1.7em 0 .7em; font-size: .9rem; font-weight: 700; color: var(--muted); }
+.sheet ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.sheet li {
+  position: relative; padding: .78em 0 .78em 1.25em;
+  border-bottom: 1px solid var(--line); font-size: .98rem;
+}
+.sheet li::before {
+  content: ""; position: absolute; left: 0; top: 1.4em;
+  width: 6px; height: 6px; background: var(--amber);
+}
+.sheet li strong { font-weight: 700; }
+.sheet code { font-family: var(--mono); font-size: .9em; overflow-wrap: anywhere; }
+.doc-link {
+  display: inline-block; margin-top: 1.3em; padding: 6px 0;
+  font-weight: 700; text-underline-offset: 5px; text-decoration-thickness: 2px;
+  text-decoration-color: var(--amber);
+}
+.doc-link:hover { color: var(--accent-ink); }

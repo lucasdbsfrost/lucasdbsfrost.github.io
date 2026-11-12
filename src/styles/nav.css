@@ -1,0 +1,48 @@
+/* ---------- Navigation ---------- */
+.skip {
+  position: fixed; left: 12px; top: -80px; z-index: 30;
+  background: var(--amber); color: var(--on-amber);
+  padding: 10px 14px; font-weight: 700; text-decoration: none; border-radius: 3px;
+}
+.skip:focus { top: 12px; }
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) var(--pad) 0;
+  background: linear-gradient(rgb(var(--bg-rgb) / .9), rgb(var(--bg-rgb) / 0));
+}
+.brand { font-weight: 800; font-size: 1.05rem; letter-spacing: -.01em; text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 30px); }
+.nav-links a {
+  font-size: .92rem; font-weight: 600; text-decoration: none;
+  padding: 12px 0; color: var(--muted); transition: color .2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links .nav-cv {
+  color: var(--ink); border: 1px solid var(--line); border-radius: 3px;
+  padding: 8px 16px; transition: border-color .2s, background .2s, color .2s;
+}
+.nav-links .nav-cv:hover { background: var(--amber); border-color: var(--amber); color: var(--on-amber); }
+
+/* Itinéraire entre les projets */
+.route {
+  position: fixed; z-index: 9;
+  right: clamp(14px, 2.2vw, 34px); top: 50%; transform: translateY(-50%);
+}
+.route { opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
+.on-route .route { opacity: 1; visibility: visible; }
+.route ol { list-style: none; margin: 0; padding: 0; display: grid; }
+.route a {
+  display: flex; justify-content: flex-end; align-items: center; gap: 10px;
+  padding: 8px 0; color: var(--muted);
+  font-size: .82rem; font-weight: 600; text-decoration: none; transition: color .25s;
+}
+.route a::after {
+  content: ""; width: 14px; height: 2px; background: currentColor; opacity: .55;
+  transition: width .3s ease, background .3s, opacity .3s;
+}
+.route a:hover { color: var(--ink); }
+.route a[aria-current="true"] { color: var(--ink); }
+.route a[aria-current="true"]::after { width: 32px; background: var(--amber); opacity: 1; }

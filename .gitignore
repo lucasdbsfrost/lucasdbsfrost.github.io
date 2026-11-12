@@ -1,0 +1,17 @@
+# Dépendances et site généré
+node_modules/
+dist/
+
+# Variables d'environnement locales (jamais dans Git)
+.env
+.env.*
+!.env.example
+
+# Dossier privé : reste sur ta machine, jamais publié
+private/*
+!private/README.md
+
+# Divers
+.DS_Store
+*.log
+.vite/

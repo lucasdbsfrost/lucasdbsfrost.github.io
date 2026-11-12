@@ -1,0 +1,15 @@
+/* ---------- Scène 3D ---------- */
+#scene {
+  position: fixed; inset: 0;
+  width: 100%; height: 100vh; height: 100lvh;
+  z-index: 0; opacity: 0; transition: opacity 1.1s ease;
+  pointer-events: none;
+}
+.ready #scene { opacity: 1; }
+.scrim {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg,
+    rgb(var(--bg-rgb) / .94) 0%,
+    rgb(var(--bg-rgb) / .74) 27%,
+    rgb(var(--bg-rgb) / 0) 60%);
+}
